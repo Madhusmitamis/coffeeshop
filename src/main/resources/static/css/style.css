@@ -1,0 +1,168 @@
+html {
+  font-size: 62.5%;
+}
+body {
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2)),
+    url("../images/header2.jpg");
+  /* background-repeat: no-repeat;
+    background-position: center; */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  /* background-size: cover; */
+  /* height: 50rem; */
+  padding: 4rem;
+  justify-content: space-around;
+  min-height: 50rem;
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+h2 {
+  font-size: 2.4rem;
+  font-weight: bold;
+  margin-block-start: 2rem;
+  margin-block-end: 2rem;
+}
+
+.mainheading {
+  font-size: 4.2rem;
+  font-weight: 800;
+  animation-name: colorchange;
+  animation-duration: 4s;
+  animation-timing-function: ease-in-out;
+  color: white;
+}
+
+@keyframes colorchange {
+  0% {
+    color: red;
+  }
+  25% {
+    color: yellow;
+  }
+  50% {
+    color: blue;
+  }
+  100% {
+    color: green;
+  }
+}
+
+nav ul {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+nav ul li a {
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  margin-right: 20px;
+}
+section {
+  margin: 1rem;
+}
+.projectcard {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.card {
+  width: calc(33.33% - 20px); /* 33.33% width for each card with some spacing */
+  margin: 10px; /* Spacing between cards */
+}
+
+/* .card {
+  border: 1px solid rgb(218, 214, 214);
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  width: 30rem;
+  margin: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+} */
+
+.card img {
+  /* height: 100%;
+  width: 100%; */
+  max-width: 100%;
+  flex: 1;
+  object-fit: cover;
+}
+.card p a {
+  text-decoration: none;
+  color: var(--coral);
+}
+.bold {
+  font-weight: 700;
+}
+.italic {
+  font-style: italic;
+}
+.card p,
+.card figure {
+  margin-block-end: 1rem;
+}
+.logo-frame {
+  /* margin-inline-end: 2rem; */
+  float: left;
+  height: 10rem;
+  width: 10rem;
+}
+.logo-frame img {
+  max-width: 100%;
+}
+.content {
+  text-align: center;
+}
+h3 {
+  margin-inline-start: 2rem;
+  margin-block-end: 1rem;
+  font-weight: bold;
+  font-size: 1.8rem;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-inline-start: 2rem;
+  margin-block-end: 3rem;
+  gap: 0.5rem;
+}
+table {
+  width: 50%;
+}
+table td,
+th {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: burlywood;
+  color: white;
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

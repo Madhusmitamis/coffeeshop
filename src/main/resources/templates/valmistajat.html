@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head th:replace="index::head"> </head>
+
+  <body>
+    <header th:replace="index::header"></header>
+
+    <h2>Admin</h2>
+    <section>
+      <ul>
+        <button><a th:href="@{/admin}">Tuotteet</a></button>
+        <button><a th:href="@{/toimittajat}">Toimittajat</a></button>
+        <button><a th:href="@{/valmistajat}">Valmistajat</a></button>
+        <button><a th:href="@{url}">Osastot</a></button>
+        <button><a th:href="@{url}">Vip-asiakkaat</a></button>
+        -->
+      </ul>
+    </section>
+
+    <h3>Lisää uusi valmistaja:</h3>
+    <form th:action="@{/valmistajat}" method="POST">
+      <label for="nimi">Valmistajan nimi:</label>
+      <input type="text" name="nimi" required />
+
+      <label for="url">Nettisivut:</label>
+      <input type="url" name="" required />
+
+      <input type="submit" value="Lisää" />
+    </form>
+
+    <table>
+      <tr>
+        <th>Valmistajan nimi</th>
+        <th>Nettisivut</th>
+        <!-- <th>Tuotteiden määrä valikoimassa</th> -->
+
+        <th></th>
+        <th></th>
+      </tr>
+      <tr th:each="valmistaja : ${valmistajat}">
+        <td th:text="${valmistaja.nimi}">nimi</td>
+        <!-- <td th:text="${valmistaja.url}"></td> -->
+        <!-- <td th:text="${valmistaja.määrä}">määrä</td> -->
+        <!-- <td th:text="${tuote.valmistaja.nimi}">valmistaja</td>  -->
+
+        <td>
+          <a
+            th:href="${valmistaja.url}"
+            th:text="${valmistaja.url}"
+            target="_blank"
+            >Linkki</a
+          >
+        </td>
+
+        <td>
+          <button><a th:href="">muokkaa</a></button>
+        </td>
+        <td>
+          <button><a th:href="">poista</a></button>
+        </td>
+      </tr>
+    </table>
+
+    <footer><p>@copyright madhu's cafe</p></footer>
+  </body>
+</html>

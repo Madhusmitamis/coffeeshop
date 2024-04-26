@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head th:replace="index::head"> </head>
+
+  <body>
+    <header th:replace="index::header"></header>
+
+    <section>
+      <h2>Admin</h2>
+      <ul>
+        <button><a th:href="@{/admin}">Tuotteet</a></button>
+        <button><a th:href="@{/toimittajat}">Toimittajat</a></button>
+        <button><a th:href="@{/valmistajat}">Valmistajat</a></button>
+        <button><a th:href="@{/osastot}">Osastot</a></button>
+        <button><a th:href="@{/vipcustomers}">Vip-asiakkaat</a></button>
+      </ul>
+    </section>
+    <h3>Lisää uusi tuote:</h3>
+    <form th:action="@{/admin}" method="POST">
+      <label for="nimi">Tuotteen nimi:</label>
+      <input type="text" name="nimi" required />
+
+      <label for="hinta">Tuotteen hinta:</label>
+      <input type="text" name="hinta" required />
+
+      <label for="kuvaus">Tuotteen kuvaus:</label>
+      <textarea rows="5" name="kuvaus" required></textarea>
+
+      <label for="osasto">Osasto:</label>
+      <select name="osasto" id="osasto">
+        <option value="">Valitse osasto</option>
+        <option
+          th:each="osasto:${osastot}"
+          th:value="${osasto.id}"
+          th:text="${osasto.nimi}"
+        ></option>
+      </select>
+
+      <label for="valmistaja">Valmistaja:</label>
+      <select name="valmistaja" id="valmistaja">
+        <option value="">Valitse valmistaja</option>
+        <option
+          th:each="valmistaja:${valmistajat}"
+          th:value="${valmistaja.id}"
+          th:text="${valmistaja.nimi}"
+        ></option>
+      </select>
+
+      <label for="toimittaja">Toimittaja:</label>
+      <select name="toimittaja" id="toimittaja">
+        <option value="">Valitse toimittaja</option>
+        <option
+          th:each="toimittaja:${toimittajat}"
+          th:value="${toimittaja.id}"
+          th:text="${toimittaja.nimi}"
+        ></option>
+      </select>
+
+      <input type="submit" value="Lisää" />
+    </form>
+
+    <table>
+      <tr>
+        <th>Tuotteen nimi</th>
+        <th>Tuotteen hinta</th>
+        <th>Osasto</th>
+        <th>Valmistaja</th>
+        <th>Toimittaja</th>
+        <th></th>
+        <th></th>
+      </tr>
+      <tr th:each="tuote : ${tuotteet}">
+        <td th:text="${tuote.nimi}">nimi</td>
+        <td th:text="${tuote.hinta}">hinta</td>
+        <td th:text="${tuote.osasto.nimi}">osasto</td>
+        <td th:text="${tuote.valmistaja.nimi}">valmistaja</td>
+
+        <!-- <td>
+          <a th:href="${link.linkki}" th:text="${link.linkki}" target="_blank"
+            >Linkki</a
+          >
+        </td> -->
+        <td th:text="${tuote.toimittaja.nimi}"></td>
+        <td>
+          <button><a href="">muokkaa</a></button>
+        </td>
+        <td>
+          <button><a href="">poista</a></button>
+        </td>
+      </tr>
+    </table>
+
+    <footer><p>@copyright madhu's cafe</p></footer>
+  </body>
+</html>

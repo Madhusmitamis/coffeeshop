@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head th:replace="index::head">
+    <!-- <title>CoffeeShop</title>
+    <link rel="stylesheet" type="text/css" th:href="@{css/reset.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{css/style.css}" /> -->
+  </head>
+
+  <body>
+    <header th:replace="index::header"></header>
+
+    <h2>Admin</h2>
+    <section>
+      <ul>
+        <button><a th:href="@{/admin}">Tuotteet</a></button>
+        <button><a th:href="@{/toimittajat}">Toimittajat</a></button>
+        <button><a th:href="@{/valmistajat}">Valmistajat</a></button>
+        <button><a th:href="@{url}">Osastot</a></button>
+        <button><a th:href="@{url}">Vip-asiakkaat</a></button>
+      </ul>
+    </section>
+    <h3>Lisää uusi toimittaja:</h3>
+    <form th:action="@{/toimittajat}" method="POST">
+      <label for="nimi">Toimittajan nimi:</label>
+      <input type="text" name="nimi" required />
+
+      <label for="nimi">Yhteyshenkilö:</label>
+      <input type="text" name="nimi" required />
+
+      <label for="email">Yhteyshenkilön sähköposti:</label>
+      <input type="email" id="email" name="email" required />
+      <input type="submit" value="Lisää" />
+    </form>
+
+    <table>
+      <tr>
+        <th>Toimittajan nimi</th>
+        <th>Yhteyshenkilö</th>
+        <th>Yhteyshenkilön sähköposti</th>
+        <th>Tuotteiden määrä valikoimassa</th>
+        <th></th>
+        <th></th>
+      </tr>
+      <tr th:each="toimittaja : ${toimittajat}">
+        <td th:text="${toimittaja.nimi}">toimittajan nimi</td>
+        <td th:text="${toimittaja.yhteyshenkilö}">hinta</td>
+        <td th:text="${toimittaja.email}">Yhteyshenkilön sähköposti</td>
+        <!-- <td th:text="${toimittaja.määrä}">Tuotteiden määrä valikoimassa</td> -->
+
+        <!-- <td>
+          <a th:href="${link.linkki}" th:text="${link.linkki}" target="_blank"
+            >Linkki</a
+          >
+        </td> -->
+        <!-- <td th:text="${toimittajat.toimittaja.nimi}"></td> -->
+        <td>
+          <button>
+            <a th:href="@{/muokkaa/{id}(id=${toimittaja.id})}">muokkaa</a>
+          </button>
+        </td>
+        <td>
+          <button>
+            <a th:href="@{/poista/{id}(id=${toimittaja.id})}">poista</a>
+          </button>
+        </td>
+      </tr>
+    </table>
+
+    <footer><p>@copyright madhu's cafe</p></footer>
+  </body>
+</html>
