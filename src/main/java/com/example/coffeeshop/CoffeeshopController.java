@@ -16,6 +16,16 @@ public class CoffeeshopController {
         return "kahvilaitteet";
     }
 
+    @GetMapping("/kulutustuotteet")
+    public String product() {
+        return "kulutustuotteet";
+    }
+
+    @GetMapping("/vipcustomers")
+    public String vipcustomer() {
+        return "vipcustomers";
+    }
+
     // @GetMapping("/osasto")
     // public String osasto(Model model) {
     // model.addAttribute("lists", osastoRepository.findAll());
