@@ -21,7 +21,17 @@ public class Tuote extends AbstractPersistable<Long> {
     private String kuvaus;
     private BigDecimal hinta;
     private String tuotekuva;
+
     @ManyToOne
     @JoinColumn(name = "osasto_id")
     private Osasto osasto;
+
+    @ManyToOne
+    @JoinColumn(name = "toimittaja_id")
+    private Toimittaja toimittaja;
+
+    @ManyToOne
+    @JoinColumn(name = "valmistaja_id")
+    private Valmistaja valmistaja;
+
 }

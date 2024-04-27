@@ -19,15 +19,15 @@
         <button><a th:href="@{/vipcustomers}">Vip-asiakkaat</a></button>
       </ul>
     </section>
-    <h3>Lisää uusi tuote:</h3>
+    <h3>Lisää osasto:</h3>
     <form th:action="@{/admin}" method="POST">
-      <label for="nimi">Tuotteen nimi:</label>
+      <label for="nimi">Osaston nimi:</label>
       <input type="text" name="nimi" required />
 
-      <label for="hinta">Tuotteen hinta:</label>
-      <input type="text" name="hinta" required />
+      <label for="ID">Osasto IDP:</label>
+      <input type="text" name="ID" required />
 
-      <label for="kuvaus">Tuotteen kuvaus:</label>
+      <!-- <label for="kuvaus">Tuotteen kuvaus:</label>
       <textarea rows="5" name="kuvaus" required></textarea>
 
       <label for="osasto">Osasto:</label>
@@ -58,33 +58,33 @@
           th:value="${toimittaja.id}"
           th:text="${toimittaja.nimi}"
         ></option>
-      </select>
+      </select> -->
 
       <input type="submit" value="Lisää" />
     </form>
 
     <table>
       <tr>
-        <th>Tuotteen nimi</th>
-        <th>Tuotteen hinta</th>
-        <th>Osasto</th>
+        <th>Osaston nimi</th>
+        <th>Osasto IDP</th>
+        <!-- <th>Osasto</th>
         <th>Valmistaja</th>
-        <th>Toimittaja</th>
+        <th>Toimittaja</th> -->
         <th></th>
         <th></th>
       </tr>
-      <tr th:each="tuote : ${tuotteet}">
-        <td th:text="${tuote.nimi}">nimi</td>
-        <td th:text="${tuote.hinta}">hinta</td>
-        <td th:text="${tuote.osasto.nimi}">osasto</td>
-        <td th:text="${tuote.valmistaja.nimi}">valmistaja</td>
+      <tr th:each="osasto : ${osastot}">
+        <td th:text="${osasto.nimi}">osaston nimi</td>
+        <td th:text="${osasto.id}">osasto idp</td>
+        <!-- <td th:text="${tuote.osasto.nimi}">osasto</td>
+        <td th:text="${tuote.valmistaja.nimi}">valmistaja</td> -->
 
         <!-- <td>
           <a th:href="${link.linkki}" th:text="${link.linkki}" target="_blank"
             >Linkki</a
           >
         </td> -->
-        <td th:text="${tuote.toimittaja.nimi}"></td>
+        <!-- <td th:text="${tuote.toimittaja.nimi}"></td> -->
         <td>
           <button><a href="">muokkaa</a></button>
         </td>

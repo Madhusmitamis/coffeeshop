@@ -1,10 +1,13 @@
 package com.example.coffeeshop;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
 
 @Controller
 public class ValmistajaController {
@@ -14,13 +17,19 @@ public class ValmistajaController {
     private TuoteRepository tuoteRepository;
 
     @GetMapping("/valmistajat")
-    public String valmistaja() {
+    public String valmistaja(Model model) {
+        List<Valmistaja> valmistajat = this.valmistajaRepository.findAll();
+        model.addAttribute("valmistajat", valmistajat);
         return "valmistajat";
     }
 
     @PostMapping("/valmistajat")
-    public String post(@RequestParam String nimi, @RequestParam String url) {
-
-        return "valmistajat";
+    public String create(@RequestParam String nimi, @RequestParam String url) {
+        Valmistaja valmistaja = new Valmistaja();
+        valmistaja.setNimi(nimi);
+        valmistaja.setUrl(url);
+        this.valmistajaRepository.save(valmistaja);
+        return "redirect:/valmistajat";
     }
+
 }

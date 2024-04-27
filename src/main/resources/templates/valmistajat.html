@@ -15,9 +15,8 @@
         <button><a th:href="@{/admin}">Tuotteet</a></button>
         <button><a th:href="@{/toimittajat}">Toimittajat</a></button>
         <button><a th:href="@{/valmistajat}">Valmistajat</a></button>
-        <button><a th:href="@{url}">Osastot</a></button>
-        <button><a th:href="@{url}">Vip-asiakkaat</a></button>
-        -->
+        <button><a th:href="@{/osastot}">Osastot</a></button>
+        <button><a th:href="@{/vipcustomers}">Vip-asiakkaat</a></button>
       </ul>
     </section>
 
@@ -27,15 +26,15 @@
       <input type="text" name="nimi" required />
 
       <label for="url">Nettisivut:</label>
-      <input type="url" name="" required />
+      <input type="text" name="url" required />
 
       <input type="submit" value="Lisää" />
     </form>
 
     <table>
       <tr>
-        <th>Valmistajan nimi</th>
-        <th>Nettisivut</th>
+        <th>Valmistajan nimi:</th>
+        <th>Nettisivut:</th>
         <!-- <th>Tuotteiden määrä valikoimassa</th> -->
 
         <th></th>
@@ -57,10 +56,10 @@
         </td>
 
         <td>
-          <button><a th:href="">muokkaa</a></button>
+          <button><a th:href="@{url}">muokkaa</a></button>
         </td>
         <td>
-          <button><a th:href="">poista</a></button>
+          <button><a th:href="@{url}">poista</a></button>
         </td>
       </tr>
     </table>

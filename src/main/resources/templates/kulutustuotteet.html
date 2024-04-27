@@ -1,70 +1,101 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <title>CoffeShop</title>
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="../static/css/reset.css"
-      th:href="@{css/reset.css}"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="../static/css/style.css"
-      th:href="@{css/style.css}"
-    />
-  </head>
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head th:replace="index::head"> </head>
 
   <body>
-    <header id="top">
-      <h2>Madhusmaita Kumari</h2>
-      <nav>
-        <ul>
-          <li><a href="./index.html">Etusivu</a></li>
-          <li><a href="./kahvilaitteet.html">kahviLaitteet</a></li>
-          <li><a href="./kulutustuotteet.html">kulutusTuotteet</a></li>
-          <li><a href="./admin.html">admin</a></li>
-          <li><a href="./vipcustomers.html">VIP customers</a></li>
-        </ul>
-      </nav>
+    <header th:replace="index::header"></header>
 
-      <h1 class="mainheading">Welcome to Madhu's cafe</h1>
-    </header>
-    <section class="project" id="projects">
-      <h3>Products</h3>
-      <div class="projectcard">
+    <section>
+      <div class ="grid-comtainer" >
         <div class="card">
           <figure>
-            <img src="./images/pic1.jpg" alt="CoffeeDevice" />
+            <img th:src="@{/images/pic1.jpg}" alt="CoffeeDevice" />
           </figure>
           <div class="content">
             <p class="bold">Lorem ipsum dolorsit amet.</p>
             <p class="italic">HTML, CSS, JavaScript</p>
             <p>
-              <a href="https://www.google.com/" target="_blank">See more</a>
+              <a th:href="@{url}">See more</a>
             </p>
           </div>
         </div>
         <div class="card">
           <figure>
-            <img src="./images/pic2.jpg" alt="CoffeeMachine" />
+            <img th:src="@{/images/pic2.jpg}" alt="CoffeeMachine" />
           </figure>
           <div class="content">
             <p class="bold">Lorem ipsum dolorsit amet.</p>
             <p class="italic">UX design layouts</p>
-            <p><a href="Seemore">See more</a></p>
+            <p><a th:href="@{url}">See more</a></p>
           </div>
         </div>
         <div class="card">
           <figure>
-            <img src="./images/pic3.jpg" alt="coffee" />
+            <img th:src="@{/images/pic3.jpg}" alt="coffeeMachine" />
           </figure>
           <div class="content">
             <p class="bold">Lorem ipsum dolorsit amet.</p>
             <p class="italic">ReactJS, Node JS</p>
-            <p><a href="Seemore">See more</a></p>
+            <p><a th:href="@{url}">See more</a></p>
           </div>
+        <div class="card">
+          <figure>
+            <img th:src="@{/images/device1.jpg}" alt="coffeeMachine" />
+          </figure>
+          <div class="content">
+            <p class="bold">Lorem ipsum dolorsit amet.</p>
+            <p class="italic">ReactJS, Node JS</p>
+            <p><a th:href="@{url}">See more</a></p>
+          </div>
+        <div class="card">
+          <figure>
+            <img th:src="@{/images/device2.jpg}" alt="coffeeMachine" />
+          </figure>
+          <div class="content">
+            <p class="bold">Lorem ipsum dolorsit amet.</p>
+            <p class="italic">ReactJS, Node JS</p>
+            <p><a th:href="@{url}">See more</a></p>
+          </div>
+        <div class="card">
+          <figure>
+            <img th:src="@{/images/device3.jpg}" alt="coffeeMachine" />
+          </figure>
+          <div class="content">
+            <p class="bold">Lorem ipsum dolorsit amet.</p>
+            <p class="italic">ReactJS, Node JS</p>
+            <p><a th:href="@{url}">See more</a></p>
+          </div>
+          <div class="card">
+            <figure>
+              <img th:src="@{/images/device4.jpg}" alt="coffeeMachine" />
+            </figure>
+            <div class="content">
+              <p class="bold">Lorem ipsum dolorsit amet.</p>
+              <p class="italic">ReactJS, Node JS</p>
+              <p><a th:href="@{url}">See more</a></p>
+            </div>
+            <div class="card">
+              <figure>
+                <img th:src="@{/images/device5.jpg}" alt="coffeeMachine" />
+              </figure>
+              <div class="content">
+                <p class="bold">Lorem ipsum dolorsit amet.</p>
+                <p class="italic">ReactJS, Node JS</p>
+                <p><a th:href="@{url}">See more</a></p>
+              </div>
+              <div class="card">
+                <figure>
+                  <img th:src="@{/images/device6.jpg}" alt="coffeeMachine" />
+                </figure>
+                <div class="content">
+                  <p class="bold">Lorem ipsum dolorsit amet.</p>
+                  <p class="italic">ReactJS, Node JS</p>
+                  <p><a th:href="@{url}">See more</a></p>
+                </div>
         </div>
       </div>
     </section>

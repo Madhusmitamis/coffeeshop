@@ -18,6 +18,7 @@ import lombok.NoArgsConstructor;
 public class Valmistaja extends AbstractPersistable<Long> {
     private String nimi;
     private String url;
+
     @OneToMany(mappedBy = "valmistaja")
     private List<Tuote> tuotteet = new ArrayList<>();
 }

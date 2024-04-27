@@ -11,13 +11,10 @@ body {
 header {
   background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2)),
     url("../images/header2.jpg");
-  /* background-repeat: no-repeat;
-    background-position: center; */
+
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  /* background-size: cover; */
-  /* height: 50rem; */
   padding: 4rem;
   justify-content: space-around;
   min-height: 50rem;
@@ -32,6 +29,7 @@ h2 {
   font-weight: bold;
   margin-block-start: 2rem;
   margin-block-end: 2rem;
+  margin-inline-start: 2rem;
 }
 
 .mainheading {
@@ -41,6 +39,9 @@ h2 {
   animation-duration: 4s;
   animation-timing-function: ease-in-out;
   color: white;
+  text-align: center;
+  flex-basis: 100%;
+  flex-grow: 1;
 }
 
 @keyframes colorchange {
@@ -70,33 +71,29 @@ nav ul li a {
   font-size: 14px;
   margin-right: 20px;
 }
-section {
-  margin: 1rem;
-}
-.projectcard {
+.indexcard {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-.card {
-  width: calc(33.33% - 20px); /* 33.33% width for each card with some spacing */
-  margin: 10px; /* Spacing between cards */
+  flex-direction: row;
+  flex-wrap: nowrap;
+  padding: 2rem;
 }
 
-/* .card {
+.card {
   border: 1px solid rgb(218, 214, 214);
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  width: 30rem;
-  margin: 1rem;
+  /* width: 30rem; */
+
   overflow: hidden;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-} */
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+  width: calc(33.33% - 20px); /* 33.33% width for each card with some spacing */
+  margin: 10px; /* Spacing between cards */
+}
 
 .card img {
-  /* height: 100%;
-  width: 100%; */
+  height: auto;
+  width: 100%;
   max-width: 100%;
   flex: 1;
   object-fit: cover;
@@ -133,6 +130,19 @@ h3 {
   font-weight: bold;
   font-size: 1.8rem;
 }
+.grid-images {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  grid-template-rows: repeat(3, auto); /* 3 rows */
+  gap: 20px; /* Gap between grid items */
+}
+
+.card {
+  /* Ensure each card takes up the entire grid cell */
+  width: 100%;
+  margin: 20px;
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -143,6 +153,8 @@ form {
 }
 table {
   width: 50%;
+  margin-inline-start: 2rem;
+  text-align: center;
 }
 table td,
 th {
@@ -155,6 +167,20 @@ table th {
   text-align: center;
   background-color: burlywood;
   color: white;
+}
+button {
+  background-color: burlywood;
+  color: white;
+  border: #fff;
+  border-radius: 2px;
+  padding: 1rem;
+  margin-block-end: 2rem;
+  margin-inline-start: 2rem;
+}
+button a {
+  color: white;
+  padding: 1rem;
+  text-decoration: none;
 }
 
 footer {

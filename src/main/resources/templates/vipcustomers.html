@@ -1,73 +1,75 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <title>CoffeShop</title>
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="../static/css/reset.css"
-      th:href="@{css/reset.css}"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="../static/css/style.css"
-      th:href="@{css/style.css}"
-    />
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head th:replace="index::head">
+    <!-- <title>CoffeeShop</title>
+    <link rel="stylesheet" type="text/css" th:href="@{css/reset.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{css/style.css}" /> -->
   </head>
 
   <body>
-    <header id="top">
-      <h2>Madhusmaita Kumari</h2>
-      <nav>
-        <ul>
-          <li><a href="./index.html">Etusivu</a></li>
-          <li><a href="./kahvilaitteet.html">kahviLaitteet</a></li>
-          <li><a href="./kulutustuotteet.html">kulutusTuotteet</a></li>
-          <li><a href="./admin.html">admin</a></li>
-          <li><a href="./vipcustomers.html">VIP customers</a></li>
-        </ul>
-      </nav>
+    <header th:replace="index::header"></header>
 
-      <h1 class="mainheading">Welcome to Madhu's cafe</h1>
-    </header>
-    <section class="project" id="projects">
-      <h3>Products</h3>
-      <div class="projectcard">
-        <div class="card">
-          <figure>
-            <img src="./images/pic1.jpg" alt="CoffeeDevice" />
-          </figure>
-          <div class="content">
-            <p class="bold">Lorem ipsum dolorsit amet.</p>
-            <p class="italic">HTML, CSS, JavaScript</p>
-            <p>
-              <a href="https://www.google.com/" target="_blank">See more</a>
-            </p>
-          </div>
-        </div>
-        <div class="card">
-          <figure>
-            <img src="./images/pic2.jpg" alt="CoffeeMachine" />
-          </figure>
-          <div class="content">
-            <p class="bold">Lorem ipsum dolorsit amet.</p>
-            <p class="italic">UX design layouts</p>
-            <p><a href="Seemore">See more</a></p>
-          </div>
-        </div>
-        <div class="card">
-          <figure>
-            <img src="./images/pic3.jpg" alt="coffee" />
-          </figure>
-          <div class="content">
-            <p class="bold">Lorem ipsum dolorsit amet.</p>
-            <p class="italic">ReactJS, Node JS</p>
-            <p><a href="Seemore">See more</a></p>
-          </div>
-        </div>
-      </div>
+    <h2>Admin</h2>
+    <section>
+      <ul>
+        <button><a th:href="@{/admin}">Tuotteet</a></button>
+        <button><a th:href="@{/toimittajat}">Toimittajat</a></button>
+        <button><a th:href="@{/valmistajat}">Valmistajat</a></button>
+        <button><a th:href="@{/osastot}">Osastot</a></button>
+        <button><a th:href="@{/vipcustomers}">Vip-asiakkaat</a></button>
+      </ul>
     </section>
+    <h3>Lisää uusi VIP-asiakas:</h3>
+    <form th:action="@{/vipcustomers}" method="POST">
+      <label for="nimi">Etunimi:</label>
+      <input type="text" name="nimi" required />
+
+      <label for="nimi">Sukunimi:</label>
+      <input type="text" name="nimi" required />
+
+      <label for="email">Sähköpostiosoite:</label>
+      <input type="email" id="email" name="email" required />
+      <input type="submit" value="Lisää" />
+    </form>
+
+    <table>
+      <tr>
+        <th>Asiakkaan etunimi</th>
+        <th>Asiakkaan sukunimi</th>
+        <th>Asiakkaan sähköpostiosoite</th>
+        <!-- <th>Tuotteiden määrä valikoimassa</th> -->
+        <th></th>
+        <th></th>
+      </tr>
+      <tr th:each="vipcustomer : ${vipcusstomers}">
+        <td th:text="${vipcustomer.etunimi}">etunimi</td>
+        <td th:text="${vipcustomer.sukunimi}">hinta</td>
+        <td th:text="${vipcustomer.email}">sähköpostiosoite</td>
+        <!-- <td th:text="${toimittaja.määrä}">Tuotteiden määrä valikoimassa</td> -->
+
+        <!-- <td>
+          <a th:href="${link.linkki}" th:text="${link.linkki}" target="_blank"
+            >Linkki</a
+          >
+        </td> -->
+        <!-- <td th:text="${toimittajat.toimittaja.nimi}"></td> -->
+        <td>
+          <button>
+            <a th:href="@{/muokkaa/{id}(id=${vipcustomer.id})}">muokkaa</a>
+          </button>
+        </td>
+        <td>
+          <button>
+            <a th:href="@{/poista/{id}(id=${vipcustomer.id})}">poista</a>
+          </button>
+        </td>
+      </tr>
+    </table>
+
     <footer><p>@copyright madhu's cafe</p></footer>
   </body>
 </html>

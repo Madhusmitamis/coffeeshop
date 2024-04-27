@@ -2,6 +2,7 @@ package com.example.coffeeshop;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -12,10 +13,15 @@ public class OsastoController {
     @Autowired
     private TuoteRepository tuoteRepository;
 
-    @PostMapping("/osasto")
-    public String create(@RequestParam String nimi, @RequestParam long osastoId) {
+    @GetMapping("/osastot")
+    public String osasto() {
+        return "osastot";
+    }
+
+    @PostMapping("/osastot")
+    public String create(@RequestParam String nimi, @RequestParam Long osastoIdp) {
         // osastoRepository.save(new osasto(nimi));
-        return "redirect:/";
+        return "redirect:/osastot";
 
     }
 }
