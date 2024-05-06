@@ -38,7 +38,7 @@
       </ul>
     </section>
     <h3>Lisää uusi tuote:</h3>
-    <form th:action="@{/admin}" method="POST">
+    <form th:action="@{/admin}" method="POST" enctype="multipart/form-data">
       <label for="nimi">Tuotteen nimi:</label>
       <input type="text" name="nimi" required />
 
@@ -48,8 +48,11 @@
       <label for="kuvaus">Tuotteen kuvaus:</label>
       <textarea rows="5" name="kuvaus" required></textarea>
 
+      <label for="kuva">Tuotteen kuva:</label>
+      <input type="file" name="kuva" id="kuva" />
+
       <label for="osasto">Osasto:</label>
-      <select name="osasto" id="osasto">
+      <select name="osastoid">
         <option value="">Valitse osasto</option>
         <option
           th:each="osasto:${osastot}"
@@ -59,7 +62,7 @@
       </select>
 
       <label for="valmistaja">Valmistaja:</label>
-      <select name="valmistaja" id="valmistaja">
+      <select name="valmistajaid">
         <option value="">Valitse valmistaja</option>
         <option
           th:each="valmistaja:${valmistajat}"
@@ -69,7 +72,7 @@
       </select>
 
       <label for="toimittaja">Toimittaja:</label>
-      <select name="toimittaja" id="toimittaja">
+      <select name="toimittajaid">
         <option value="">Valitse toimittaja</option>
         <option
           th:each="toimittaja:${toimittajat}"
@@ -104,10 +107,10 @@
         </td> -->
         <td th:text="${tuote.toimittaja.nimi}"></td>
         <td>
-          <button><a th:href="">muokkaa</a></button>
+          <button><a th:href="@{url}">muokkaa</a></button>
         </td>
         <td>
-          <button><a th:href="">poista</a></button>
+          <button><a th:href="@{url}">poista</a></button>
         </td>
       </tr>
     </table>

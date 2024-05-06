@@ -28,11 +28,11 @@
       <label for="nimi">Toimittajan nimi:</label>
       <input type="text" name="nimi" required />
 
-      <label for="nimi">Yhteyshenkilo:</label>
-      <input type="text" name="nimi" required />
+      <label for="yhteyshenkilo">Yhteyshenkilo:</label>
+      <input type="text" name="yhteyshenkilo" required />
 
-      <label for="email">Yhteyshenkilön sähköposti:</label>
-      <input type="email" id="email" name="email" required />
+      <label for="yhteyshenkilonEmail">Yhteyshenkilön sähköposti:</label>
+      <input type="email" id="email" name="yhteyshenkilonEmail" required />
       <input type="submit" value="Lisää" />
     </form>
 
@@ -61,13 +61,16 @@
         <!-- <td th:text="${toimittajat.toimittaja.nimi}"></td> -->
         <td>
           <button>
-            <a th:href="@{/muokkaa/{id}(id=${toimittaja.id})}">muokkaa</a>
+            <a th:href="@{/muokkaToimittaja/{id}(id=${toimittaja.id})}"
+              >muokkaa</a
+            >
           </button>
         </td>
         <td>
-          <button>
-            <a th:href="@{/poista/{id}(id=${toimittaja.id})}">poista</a>
-          </button>
+          <form th:action="@{/toimittajat/delete}" method="post">
+            <input type="hidden" name="id" th:value="${toimittaja.id}" />
+            <button type="submit">Poista</button>
+          </form>
         </td>
       </tr>
     </table>

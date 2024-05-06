@@ -25,6 +25,9 @@ public class ValmistajaController {
 
     @PostMapping("/valmistajat")
     public String create(@RequestParam String nimi, @RequestParam String url) {
+        if (valmistajaRepository.existsByNimi(nimi)) {
+            return "redirect:/valmistajat?error=DuplicateName";
+        }
         Valmistaja valmistaja = new Valmistaja();
         valmistaja.setNimi(nimi);
         valmistaja.setUrl(url);

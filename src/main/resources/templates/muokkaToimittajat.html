@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head th:replace="index::head">
+    <!-- <title>CoffeeShop</title>
+    <link rel="stylesheet" type="text/css" th:href="@{css/reset.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{css/style.css}" /> -->
+  </head>
+
+  <body>
+    <header th:replace="index::header"></header>
+    <h2>Muokkaa Toimittaja</h2>
+    <form
+      th:action="@{/muokkaToimittaja/{id}(id=${toimittaja.id})}"
+      method="post"
+    >
+      <input type="hidden" name="_method" value="post" />
+      <label for="nimi">Toimittajan nimi:</label>
+      <input type="text" name="nimi" th:value="${toimittaja.nimi}" required />
+
+      <label for="yhteyshenkilo">Yhteyshenkilo:</label>
+      <input
+        type="text"
+        name="yhteyshenkilo"
+        th:value="${toimittaja.yhteyshenkilo}"
+        required
+      />
+
+      <label for="yhteyshenkilonEmail">Yhteyshenkilön sähköposti:</label>
+      <input
+        type="email"
+        name="yhteyshenkilonEmail"
+        th:value="${toimittaja.yhteyshenkilonEmail}"
+        required
+      />
+
+      <button type="submit">Päivitä</button>
+    </form>
+
+    <footer><p>@copyright madhu's cafe</p></footer>
+  </body>
+</html>

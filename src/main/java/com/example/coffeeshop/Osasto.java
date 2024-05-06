@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 public class Osasto extends AbstractPersistable<Long> {
 
     private String nimi;
-    private Long osastoId;
+    private Long osastoIdp;
     @OneToMany(mappedBy = "osasto")
     private List<Tuote> tuotteet = new ArrayList<>();
 

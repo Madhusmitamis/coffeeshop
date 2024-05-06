@@ -20,12 +20,12 @@
       </ul>
     </section>
     <h3>Lisää osasto:</h3>
-    <form th:action="@{/admin}" method="POST">
+    <form th:action="@{/osastot}" method="POST">
       <label for="nimi">Osaston nimi:</label>
       <input type="text" name="nimi" required />
 
-      <label for="ID">Osasto IDP:</label>
-      <input type="text" name="ID" required />
+      <label for="osastoIdp">Osasto IDP:</label>
+      <input type="text" name="osastoIdp" required />
 
       <!-- <label for="kuvaus">Tuotteen kuvaus:</label>
       <textarea rows="5" name="kuvaus" required></textarea>
@@ -75,7 +75,7 @@
       </tr>
       <tr th:each="osasto : ${osastot}">
         <td th:text="${osasto.nimi}">osaston nimi</td>
-        <td th:text="${osasto.id}">osasto idp</td>
+        <td th:text="${osasto.osastoIdp}">osasto idp</td>
         <!-- <td th:text="${tuote.osasto.nimi}">osasto</td>
         <td th:text="${tuote.valmistaja.nimi}">valmistaja</td> -->
 
@@ -86,7 +86,7 @@
         </td> -->
         <!-- <td th:text="${tuote.toimittaja.nimi}"></td> -->
         <td>
-          <button><a href="">muokkaa</a></button>
+          <button><a th:href="@{/muokkaaOsasto}">muokkaa</a></button>
         </td>
         <td>
           <button><a href="">poista</a></button>
