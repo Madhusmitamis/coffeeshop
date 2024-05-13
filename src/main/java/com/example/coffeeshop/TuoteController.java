@@ -2,15 +2,15 @@ package com.example.coffeeshop;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
@@ -23,69 +23,60 @@ public class TuoteController {
     private OsastoRepository osastoRepository;
     @Autowired
     private TuoteRepository tuoteRepository;
+    @Autowired
+    private TuoteService tuoteService;
 
     @GetMapping("/admin")
     public String tuote(Model model) {
-        model.addAttribute("osastot", this.osastoRepository.findAll());
-        model.addAttribute("toimittajat", this.toimittajaRepository.findAll());
-        model.addAttribute("valmistajat", this.valmistajaRepository.findAll());
-        List<Tuote> tuotteet = this.tuoteRepository.findAll();
-        model.addAttribute("tuotteet", tuotteet);
+        model.addAttribute("osastot", tuoteService.findAllDepartments());
+        model.addAttribute("toimittajat", toimittajaRepository.findAll());
+        model.addAttribute("valmistajat", valmistajaRepository.findAll());
+        model.addAttribute("tuotteet", tuoteService.findAllProducts());
         return "admin";
     }
 
     @PostMapping("/admin")
     public String addTuote(@RequestParam String nimi, @RequestParam String kuvaus, @RequestParam BigDecimal hinta,
-            // @RequestParam String tuotekuva,
             @RequestParam Long toimittajaid, @RequestParam Long valmistajaid,
-            @RequestParam Long osastoid, @RequestParam("kuva") MultipartFile file) {
-        if (tuoteRepository.existsByNimi(nimi)) {
-            return "redirect:/admin?error=DuplicateName";
-        }
-        Tuote tuote = new Tuote();
-        tuote.setNimi(nimi);
-        tuote.setKuvaus(kuvaus);
-        tuote.setHinta(hinta);
-        if (!file.isEmpty()) {
-            try {
-                byte[] bytes = file.getBytes();
-                // Save the file to your desired location or store it in the database
-                // For example:
-                // Path path = Paths.get("path/to/your/directory/" +
-                // file.getOriginalFilename());
-                // Files.write(path, bytes);
-                tuote.setTuotekuva(file.getOriginalFilename());
-            } catch (IOException e) {
-                e.printStackTrace();
-                // Handle file upload error
-            }
-        }
-        // tuote.setTuotekuva(tuotekuva);
-        Valmistaja v = valmistajaRepository.findById(valmistajaid).orElse(null);
-        tuote.setValmistaja(v);
-        Osasto o = osastoRepository.findById(osastoid).orElse(null);
-        tuote.setOsasto(o);
-        Toimittaja t = toimittajaRepository.findById(toimittajaid).orElse(null);
-        tuote.setToimittaja(t);
+            @RequestParam Long osastoid, @RequestParam("kuva") MultipartFile file) throws IOException {
 
-        this.tuoteRepository.save(tuote);
+        byte[] bytes = file.getBytes();
+        tuoteService.addTuote(nimi, kuvaus, hinta, toimittajaid, valmistajaid, osastoid, bytes);
+
         return "redirect:/admin";
 
     }
 
-    // @PostMapping("/admin/{tuoteId}/toimittajat/{toimittajaId}/valmistajat{valmistajaId}/osastot{osastoId}")
-    // public String addOmistaja(@PathVariable Long touteId, @PathVariable Long
-    // toimittajaId,
-    // @PathVariable Long valmistajaId, @PathVariable Long osastoId) {
-    // Tuote tuote = tuoteRepository.getOne(tuoteId);
-    // Toimittaja toimittaja = toimittajaRepository.getOne(toimittajaId);
-    // Valmistaja valmistaja = valmistajaRepository.getOne(valmistajaId);
-    // Osasto osasto = osastoRepository.getOne(osastoId);
+    @GetMapping("/muokkaTuote/{id}")
+    public String muokkaTuote(Model model, @PathVariable Long id) {
+        Tuote tuote = tuoteService.findProductById(id);
+        if (tuote == null) {
+            return "redirect:/admin?error=ProductNotFound";
+        }
+        String kuvaUrl = "/kuva/" + id;
+        model.addAttribute("kuvaUrl", kuvaUrl);
+        model.addAttribute("tuote", tuote);
+        model.addAttribute("kuvaus", tuote.getKuvaus());
+        model.addAttribute("osastot", tuoteService.findAllDepartments());
+        model.addAttribute("valmistajat", tuoteService.findAllValmistajat());
+        model.addAttribute("toimittajat", tuoteService.findAllToimittajat());
+        return "muokkaAdmin";
+    }
 
-    // tuote.getTuotteet().add(tuote);
-    // touteRepository.save(tuote);
+    @PostMapping("/muokkaAdmin/{id}")
+    public String paivitaTuote(@PathVariable Long id, @RequestParam String nimi,
+            @RequestParam String kuvaus,
+            @RequestParam BigDecimal hinta,
+            @RequestParam Long toimittajaid, @RequestParam Long valmistajaid,
+            @RequestParam Long osastoid) {
+        tuoteService.updateTuote(id, nimi, kuvaus, hinta, toimittajaid, valmistajaid, osastoid);
+        return "redirect:/admin";
+    }
 
-    // return "redirect:/admin/" + tuoteId;
-    // }
+    @PostMapping("/poistaTuote/{id}")
+    public String poistaTuote(@PathVariable Long id) {
+        tuoteService.deleteTuote(id);
+        return "redirect:/admin";
+    }
 
 }

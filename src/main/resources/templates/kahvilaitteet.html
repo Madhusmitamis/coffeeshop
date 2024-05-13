@@ -9,101 +9,43 @@
   <body>
     <header th:replace="index::header"></header>
 
+    <a th:href="@{/}"></a>
     <section class="grid-images">
-      <div class="card">
-          <figure>
-            <img th:src="@{/images/pic1.jpg}" alt="CoffeeDevice" />
-          </figure>
-          <div class="content">
-            <p class="bold">Lorem ipsum dolorsit amet.</p>
-            <p class="italic">HTML, CSS, JavaScript</p>
-            <p>
-              <a th:href="@{url}">See more</a>
-            </p>
-          </div>
-        </div>
-        <div class="card">
-          <figure>
-            <img th:src="@{/images/pic2.jpg}" alt="CoffeeMachine" />
-          </figure>
-          <div class="content">
-            <p class="bold">Lorem ipsum dolorsit amet.</p>
-            <p class="italic">UX design layouts</p>
-            <p><a th:href="@{url}">See more</a></p>
-          </div>
-        </div>
-        <div class="card">
-          <figure>
-            <img th:src="@{/images/pic3.jpg}" alt="coffeeMachine" />
-          </figure>
-          <div class="content">
-            <p class="bold">Lorem ipsum dolorsit amet.</p>
-            <p class="italic">ReactJS, Node JS</p>
-            <p><a th:href="@{url}">See more</a></p>
-          </div>
-        </div>
-        <div class="card">
-          <figure>
-            <img th:src="@{/images/device1.jpg}" alt="coffeeMachine" />
-          </figure>
-          <div class="content">
-            <p class="bold">Lorem ipsum dolorsit amet.</p>
-            <p class="italic">ReactJS, Node JS</p>
-            <p><a th:href="@{url}">See more</a></p>
-          </div>
-        </div>
-        <div class="card">
-          <figure>
-            <img th:src="@{/images/device2.jpg}" alt="coffeeMachine" />
-          </figure>
-          <div class="content">
-            <p class="bold">Lorem ipsum dolorsit amet.</p>
-            <p class="italic">ReactJS, Node JS</p>
-            <p><a th:href="@{url}">See more</a></p>
-          </div>
-        </div>
-        <div class="card">
-          <figure>
-            <img th:src="@{/images/device3.jpg}" alt="coffeeMachine" />
-          </figure>
-          <div class="content">
-            <p class="bold">Lorem ipsum dolorsit amet.</p>
-            <p class="italic">ReactJS, Node JS</p>
-            <p><a th:href="@{url}">See more</a></p>
-          </div>
-        </div>
-          <div class="card">
-            <figure>
-              <img th:src="@{/images/device4.jpg}" alt="coffeeMachine" />
-            </figure>
-            <div class="content">
-              <p class="bold">Lorem ipsum dolorsit amet.</p>
-              <p class="italic">ReactJS, Node JS</p>
-              <p><a th:href="@{url}">See more</a></p>
-            </div>
-          </div>
-            <div class="card">
-              <figure>
-                <img th:src="@{/images/device5.jpg}" alt="coffeeMachine" />
-              </figure>
-              <div class="content">
-                <p class="bold">Lorem ipsum dolorsit amet.</p>
-                <p class="italic">ReactJS, Node JS</p>
-                <p><a th:href="@{url}">See more</a></p>
-              </div>
-            </div>
-              <div class="card">
-                <figure>
-                  <img th:src="@{/images/device6.jpg}" alt="coffeeMachine" />
-                </figure>
-                <div class="content">
-                  <p class="bold">Lorem ipsum dolorsit amet.</p>
-                  <p class="italic">ReactJS, Node JS</p>
-                  <p><a th:href="@{url}">See more</a></p>
-                </div>
+      <div class="card" th:each="tuote : ${tuotteet}">
+        <figure>
+          <img th:src="@{/images/__${tuote.kuva}__}" alt="CoffeeDevice" />
+        </figure>
+        <div class="content">
+          <p th:text="${tuote.nimi}"></p>
+          <p th:text="${tuote.hinta}"></p>
+          <p th:utext="${tuote.kuvaus}"></p>
+
+          <button>
+            <a th:href="@{url}">Katso lisätiedot</a>
+          </button>
         </div>
       </div>
     </section>
+    <!-- <h1>Devices</h1>
+    <table>
+      <tr>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+      </tr>
+      <tr th:each="device : ${devices}">
+        <td>
+          <img
+            th:src="'data:image/jpeg;base64,' + ${#strings.toEncodedString(device.image, 'base64')}"
+            width="100"
+          />
+        </td>
+        <td th:text="${device.name}"></td>
+        <td th:text="${device.description}"></td>
+        <td th:text="${device.price}"></td>
+      </tr>
+    </table> -->
     <footer><p>@copyright madhu's cafe</p></footer>
   </body>
 </html>

@@ -13,6 +13,70 @@
   <body>
     <header th:replace="index::header"></header>
 
+    <section>
+      <h2>Admin</h2>
+      <ul>
+        <button><a th:href="@{/admin}">Tuotteet</a></button>
+        <button><a th:href="@{/toimittajat}">Toimittajat</a></button>
+        <button><a th:href="@{/valmistajat}">Valmistajat</a></button>
+        <button><a th:href="@{/osastot}">Osastot</a></button>
+        <button><a th:href="@{url}">Vip-asiakkaat</a></button>
+      </ul>
+    </section>
+    <h3>Muokkaa tuote:</h3>
+    <form
+      th:action="@{/muokkaAdmin/{id}(id=${tuote.id})}"
+      method="POST"
+      enctype="multipart/form-data"
+    >
+      <figure>
+        <img th:src="${kuvaUrl}" alt="kuva" />
+      </figure>
+      <label for="nimi">Tuotteen nimi:</label>
+      <input type="text" name="nimi" th:value="${tuote.nimi}" required />
+
+      <label for="hinta">Tuotteen hinta:</label>
+      <input type="text" name="hinta" th:value="${tuote.hinta}" required />
+
+      <label for="kuvaus">Tuotteen kuvaus:</label>
+      <textarea rows="5" name="kuvaus" th:utext="${kuvaus}" required></textarea>
+
+      <label for="osasto">Osasto:</label>
+      <select name="osastoid">
+        <option
+          th:each="osasto : ${osastot}"
+          th:value="${osasto.id}"
+          th:text="${osasto.nimi}"
+        >
+          Valitse osasto
+        </option>
+      </select>
+
+      <label for="valmistaja">Valmistaja:</label>
+      <select name="valmistajaid">
+        <option
+          th:each="valmistaja : ${valmistajat}"
+          th:value="${valmistaja.id}"
+          th:text="${valmistaja.nimi}"
+        >
+          Valitse valmistaja
+        </option>
+      </select>
+
+      <label for="toimittaja">Toimittaja:</label>
+      <select name="toimittajaid">
+        <option
+          th:each="toimittaja : ${toimittajat}"
+          th:value="${toimittaja.id}"
+          th:text="${toimittaja.nimi}"
+        >
+          Valitse toimittaja
+        </option>
+      </select>
+
+      <input type="submit" value="Muokka" />
+    </form>
+
     <footer><p>@copyright madhu's cafe</p></footer>
   </body>
 </html>

@@ -67,8 +67,8 @@ public class ToimittajaController {
         return "redirect:/toimittajat";
     }
 
-    @PostMapping("/toimittajat/delete")
-    public String poistaToimittaja(@RequestParam Long id) {
+    @PostMapping("/poistaToimittaja/{id}")
+    public String poistaToimittaja(@PathVariable Long id) {
         // Delete the supplier by ID
         toimittajaRepository.deleteById(id);
         return "redirect:/toimittajat";

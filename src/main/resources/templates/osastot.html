@@ -86,10 +86,17 @@
         </td> -->
         <!-- <td th:text="${tuote.toimittaja.nimi}"></td> -->
         <td>
-          <button><a th:href="@{/muokkaaOsasto}">muokkaa</a></button>
+          <button>
+            <a th:href="@{/muokkaOsasto/{id}(id=${osasto.id})}">muokkaa</a>
+          </button>
         </td>
         <td>
-          <button><a href="">poista</a></button>
+          <form
+            th:action="@{/poistaOsasto/{id}(id=${osasto.id})}"
+            method="POST"
+          >
+            <button type="submit">Poista</button>
+          </form>
         </td>
       </tr>
     </table>

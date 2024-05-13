@@ -1,7 +1,5 @@
 package com.example.coffeeshop;
 
-import java.math.BigDecimal;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,20 +34,33 @@ public class OsastoController {
         return "redirect:/osastot";
     }
 
-    // @GetMapping("/osastot/{id}")
-    // public String getOne(Model model, @PathVariable Long id) {
-    // model.addAttribute("osastot", osastoRepository.getOne(id));
-    // return "osastot";
-    // }
+    @GetMapping("/muokkaOsasto/{id}")
+    public String muokkaOsasto(Model model, @PathVariable Long id) {
+        Osasto osasto = osastoRepository.findById(id).orElse(null);
+        if (osasto == null) {
+            return "redirect:/osastot?error=DepartmentNotFound";
+        }
+        model.addAttribute("osasto", osasto);
+        return "muokkaOsasto";
+    }
 
-    // @PostMapping("/osastot/{id}/admin")
-    // public String addTuote(@PathVariable Long id, @RequestParam String nimi,
-    // @RequestParam BigDecimal hinta,
-    // @RequestParam String kuvaus, @RequestParam String tuotekuva) {
-    // Osasto o = osastoRepository.getOne(id);
-    // Tuote t = new Tuote(nimi, hinta, kuvaus, tuotekuva, o);
-    // tuoteRepository.save(t);
-    // return "redirect:/osastot/" + id;
-    // }
+    @PostMapping("/muokkaOsasto/{id}")
+    public String paivitaOsasto(@PathVariable Long id, @RequestParam String nimi, @RequestParam Long osastoIdp) {
+        Osasto osasto = osastoRepository.findById(id).orElse(null);
+        if (osasto == null) {
+            return "redirect:/osastot?error=DepartmentNotFound";
+        }
+        osasto.setNimi(nimi);
+        osasto.setOsastoIdp(osastoIdp);
+        osastoRepository.save(osasto);
+        return "redirect:/osastot";
+    }
+
+    @PostMapping("/poistaOsasto/{id}")
+    public String poistaOsasto(@PathVariable Long id) {
+        osastoRepository.deleteById(id);
+        // You might want to handle related entities before deletion
+        return "redirect:/osastot";
+    }
 
 }

@@ -56,10 +56,16 @@
         </td>
 
         <td>
-          <button><a th:href="@{url}">muokkaa</a></button>
+          <button>
+            <a th:href="@{/muokkaValmistaja/{id}(id=${valmistaja.id})}"
+              >muokkaa</a
+            >
+          </button>
         </td>
         <td>
-          <button><a th:href="@{url}">poista</a></button>
+          <form th:action="@{/poistaValmistaja/{id}(id=${valmistaja.id})}" method="POST">
+          
+          <button type ="submit">Poista</button>
         </td>
       </tr>
     </table>

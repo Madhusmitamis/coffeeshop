@@ -12,6 +12,16 @@
 
   <body>
     <header th:replace="index::header"></header>
+    <section>
+      <h2>Admin</h2>
+      <ul>
+        <button><a th:href="@{/admin}">Tuotteet</a></button>
+        <button><a th:href="@{/toimittajat}">Toimittajat</a></button>
+        <button><a th:href="@{/valmistajat}">Valmistajat</a></button>
+        <button><a th:href="@{/osastot}">Osastot</a></button>
+        <button><a th:href="@{url}">Vip-asiakkaat</a></button>
+      </ul>
+    </section>
     <h2>Muokkaa Toimittaja</h2>
     <form
       th:action="@{/muokkaToimittaja/{id}(id=${toimittaja.id})}"

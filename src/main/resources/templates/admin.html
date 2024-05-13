@@ -12,21 +12,7 @@
 
   <body>
     <header th:replace="index::header"></header>
-    <!-- <figure class="logo-frame">
-        <img th:src="@{/images/logo.png}" alt="logo" />
-      </figure>
 
-      <nav>
-        <ul>
-          <li><a th:href="@{/}">Etusivu</a></li>
-          <li><a th:href="@{/kahvilaitteet}">kahviLaitteet</a></li>
-          <li><a th:href="@{/kulutustuotteet}">kulutusTuotteet</a></li>
-          <li><a th:href="@{/admin}">admin</a></li>
-          <li><a th:href="@{/vipcustomers}">VIP customers</a></li>
-        </ul>
-      </nav>
-      <h1 class="mainheading">Welcome to Madhu's cafe</h1>
-     -->
     <section>
       <h2>Admin</h2>
       <ul>
@@ -53,7 +39,7 @@
 
       <label for="osasto">Osasto:</label>
       <select name="osastoid">
-        <option value="">Valitse osasto</option>
+        <option th:value="${null}">Valitse osasto</option>
         <option
           th:each="osasto:${osastot}"
           th:value="${osasto.id}"
@@ -63,7 +49,7 @@
 
       <label for="valmistaja">Valmistaja:</label>
       <select name="valmistajaid">
-        <option value="">Valitse valmistaja</option>
+        <option th:value="${null}">Valitse valmistaja</option>
         <option
           th:each="valmistaja:${valmistajat}"
           th:value="${valmistaja.id}"
@@ -73,7 +59,7 @@
 
       <label for="toimittaja">Toimittaja:</label>
       <select name="toimittajaid">
-        <option value="">Valitse toimittaja</option>
+        <option th:value="${null}">Valitse toimittaja</option>
         <option
           th:each="toimittaja:${toimittajat}"
           th:value="${toimittaja.id}"
@@ -97,20 +83,24 @@
       <tr th:each="tuote : ${tuotteet}">
         <td th:text="${tuote.nimi}">nimi</td>
         <td th:text="${tuote.hinta}">hinta</td>
-        <td th:text="${tuote.osasto.nimi}">osasto</td>
-        <td th:text="${tuote.valmistaja.nimi}">valmistaja</td>
+        <td th:text="${tuote.osasto?.nimi}">osasto</td>
+        <td th:text="${tuote.valmistaja?.nimi}">valmistaja</td>
 
         <!-- <td>
           <a th:href="${link.linkki}" th:text="${link.linkki}" target="_blank"
             >Linkki</a
           >
         </td> -->
-        <td th:text="${tuote.toimittaja.nimi}"></td>
+        <td th:text="${tuote.toimittaja?.nimi}"></td>
         <td>
-          <button><a th:href="@{url}">muokkaa</a></button>
+          <button>
+            <a th:href="@{/muokkaTuote/{id}(id=${tuote.id})}">muokkaa</a>
+          </button>
         </td>
         <td>
-          <button><a th:href="@{url}">poista</a></button>
+          <form th:action="@{/poistaTuote/{id}(id=${tuote.id})}" method="POST">
+            <button type="submit">Poista</button>
+          </form>
         </td>
       </tr>
     </table>

@@ -67,8 +67,10 @@
           </button>
         </td>
         <td>
-          <form th:action="@{/toimittajat/delete}" method="post">
-            <input type="hidden" name="id" th:value="${toimittaja.id}" />
+          <form
+            th:action="@{/poistaToimittaja/{id}(id=${toimittaja.id})}"
+            method="POST"
+          >
             <button type="submit">Poista</button>
           </form>
         </td>

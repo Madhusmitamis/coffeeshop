@@ -12,6 +12,27 @@
 
   <body>
     <header th:replace="index::header"></header>
+    <section>
+      <h2>Admin</h2>
+      <ul>
+        <button><a th:href="@{/admin}">Tuotteet</a></button>
+        <button><a th:href="@{/toimittajat}">Toimittajat</a></button>
+        <button><a th:href="@{/valmistajat}">Valmistajat</a></button>
+        <button><a th:href="@{/osastot}">Osastot</a></button>
+        <button><a th:href="@{url}">Vip-asiakkaat</a></button>
+      </ul>
+    </section>
+    <h3>Muokkaa valmistajaa:</h3>
+    <form th:action="@{'/muokkaValmistaja/' + ${valmistaja.id}}" method="POST">
+      <input type="hidden" name="_method" value="PUT" />
+      <label for="nimi">Valmistajan nimi:</label>
+      <input type="text" name="nimi" th:value="${valmistaja.nimi}" required />
+
+      <label for="url">Nettisivut:</label>
+      <input type="text" name="url" th:value="${valmistaja.url}" required />
+
+      <input type="submit" value="Päivitä" />
+    </form>
 
     <footer><p>@copyright madhu's cafe</p></footer>
   </body>
