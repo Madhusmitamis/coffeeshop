@@ -4,15 +4,15 @@
   xmlns="http://www.w3.org/1999/xhtml"
   xmlns:th="http://www.thymeleaf.org"
 >
-  <head th:replace="index::head"> </head>
+  <head th:replace="~{index::head}"> </head>
 
   <body>
-    <header th:replace="index::header"></header>
+    <header th:replace="~{index::header}"></header>
 
     <section class="grid-images">
        <div class="card">
           <figure>
-            <img th:src="@{/images/pic1.jpg}" alt="CoffeeDevice" />
+            <!-- <img th:src="@{/images/pic1.jpg}" alt="CoffeeDevice" /> -->
           </figure>
           <div class="content">
             <p class="bold">Lorem ipsum dolorsit amet.</p>

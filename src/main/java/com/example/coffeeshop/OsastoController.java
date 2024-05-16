@@ -14,29 +14,31 @@ public class OsastoController {
     private OsastoRepository osastoRepository;
     @Autowired
     private TuoteRepository tuoteRepository;
+    @Autowired
+    private OsastoService osastoService;
 
     @GetMapping("/osastot")
     public String osasto(Model model) {
-        model.addAttribute("osastot", osastoRepository.findAll());
+        model.addAttribute("osastot", osastoService.findAllOsastot());
         // model.addAttribute("tuotteet", tuoteRepository.findAll());
         return "osastot";
     }
 
     @PostMapping("/osastot")
     public String create(@RequestParam String nimi, @RequestParam Long osastoIdp) {
-        if (osastoRepository.existsByNimi(nimi)) {
+        if (osastoService.existsByNimi(nimi)) {
             return "redirect:/osastot?error=DuplicateName";
         }
         Osasto osasto = new Osasto();
         osasto.setNimi(nimi);
         osasto.setOsastoIdp(osastoIdp);
-        osastoRepository.save(osasto);
+        osastoService.save(osasto);
         return "redirect:/osastot";
     }
 
     @GetMapping("/muokkaOsasto/{id}")
     public String muokkaOsasto(Model model, @PathVariable Long id) {
-        Osasto osasto = osastoRepository.findById(id).orElse(null);
+        Osasto osasto = osastoService.findOsastoById(id);
         if (osasto == null) {
             return "redirect:/osastot?error=DepartmentNotFound";
         }
@@ -46,19 +48,17 @@ public class OsastoController {
 
     @PostMapping("/muokkaOsasto/{id}")
     public String paivitaOsasto(@PathVariable Long id, @RequestParam String nimi, @RequestParam Long osastoIdp) {
-        Osasto osasto = osastoRepository.findById(id).orElse(null);
+        Osasto osasto = osastoService.findOsastoById(id);
         if (osasto == null) {
             return "redirect:/osastot?error=DepartmentNotFound";
         }
-        osasto.setNimi(nimi);
-        osasto.setOsastoIdp(osastoIdp);
-        osastoRepository.save(osasto);
+        osastoService.updateOsasto(id, nimi, osastoIdp);
         return "redirect:/osastot";
     }
 
     @PostMapping("/poistaOsasto/{id}")
     public String poistaOsasto(@PathVariable Long id) {
-        osastoRepository.deleteById(id);
+        osastoService.deleteOsasto(id);
         // You might want to handle related entities before deletion
         return "redirect:/osastot";
     }

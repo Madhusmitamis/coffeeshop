@@ -3,9 +3,9 @@ html {
 }
 body {
   font-family: "Open Sans", sans-serif;
-  line-height: 1.5rem;
-  margin-top: 28%;
-  padding: 0;
+  /* line-height: 1.5rem;
+  margin-top: 35%;
+  padding: 0; */
 }
 
 header {
@@ -13,20 +13,14 @@ header {
     url("../images/header2.jpg");
 
   display: flex;
-  flex-direction: row;
+  /* flex-direction: row; */
   flex-wrap: wrap;
   padding: 4rem;
   justify-content: space-around;
-  min-height: 22%;
-  /* Create the parallax scrolling effect */
   background-attachment: fixed;
-  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  /* z-index: 1000; */
+  max-width: 100%;
 }
 /* header + .indexcard {
   padding-top: 102px;
@@ -67,10 +61,11 @@ h2 {
 }
 
 nav ul {
-  list-style-type: none;
+  /* list-style-type: none; */
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  /* position: fixed; */
+  /* flex-direction: row;
+  flex-wrap: wrap; */
 }
 nav ul li a {
   text-decoration: none;
@@ -92,8 +87,6 @@ nav ul li a {
   padding: 1rem;
   /* width: 30rem; */
   overflow: auto;
-  /* overflow: hidden; */
-  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
   width: calc(33.33% - 20px); /* 33.33% width for each card with some spacing */
   margin: 10px; /* Spacing between cards */
 }
@@ -120,9 +113,6 @@ nav ul li a {
   margin-block-end: 1rem;
 }
 .logo-frame {
-  /* margin-inline-end: 2rem; */
-  float: left;
-  height: 10rem;
   width: 10rem;
 }
 .logo-frame img {
@@ -151,7 +141,21 @@ h3 {
   width: 100%;
   margin: 20px;
 }
-
+img {
+  width: 30%;
+  /* padding-inline-start: 4rem; */
+  padding-block-start: 4rem;
+}
+p {
+  font-size: 2rem;
+  padding-inline-start: 4rem;
+  padding-block-start: 2rem;
+}
+h1 {
+  padding-block-start: 4rem;
+  padding-inline-start: 4rem;
+  font-size: 4rem;
+}
 form {
   display: flex;
   flex-direction: column;
@@ -161,7 +165,7 @@ form {
   gap: 0.5rem;
 }
 table {
-  width: 50%;
+  width: 100%;
   margin-inline-start: 2rem;
   text-align: center;
 }
@@ -201,7 +205,7 @@ footer {
   justify-content: center;
   align-items: center;
   overflow: auto;
-  position: fixed;
+  /* position: fixed; */
   width: 100%;
   bottom: 0;
 }

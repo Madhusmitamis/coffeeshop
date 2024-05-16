@@ -4,10 +4,10 @@
   xmlns="http://www.w3.org/1999/xhtml"
   xmlns:th="http://www.thymeleaf.org"
 >
-  <head th:replace="index::head"> </head>
+  <head th:replace="~{index::head}"> </head>
 
   <body>
-    <header th:replace="index::header"></header>
+    <header th:replace="~{index::header}"></header>
 
     <h2>Admin</h2>
     <section>
@@ -42,10 +42,6 @@
       </tr>
       <tr th:each="valmistaja : ${valmistajat}">
         <td th:text="${valmistaja.nimi}">nimi</td>
-        <!-- <td th:text="${valmistaja.url}"></td> -->
-        <!-- <td th:text="${valmistaja.määrä}">määrä</td> -->
-        <!-- <td th:text="${tuote.valmistaja.nimi}">valmistaja</td>  -->
-
         <td>
           <a
             th:href="${valmistaja.url}"
@@ -63,9 +59,12 @@
           </button>
         </td>
         <td>
-          <form th:action="@{/poistaValmistaja/{id}(id=${valmistaja.id})}" method="POST">
-          
-          <button type ="submit">Poista</button>
+          <form
+            th:action="@{/poistaValmistaja/{id}(id=${valmistaja.id})}"
+            method="POST"
+          >
+            <button type="submit">Poista</button>
+          </form>
         </td>
       </tr>
     </table>

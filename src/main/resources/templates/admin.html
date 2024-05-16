@@ -4,14 +4,14 @@
   xmlns="http://www.w3.org/1999/xhtml"
   xmlns:th="http://www.thymeleaf.org"
 >
-  <head th:replace="index::head">
+  <head th:replace="~{index::head}">
     <!-- <title>CoffeeShop</title>
     <link rel="stylesheet" type="text/css" th:href="@{css/reset.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{css/style.css}" /> -->
   </head>
 
   <body>
-    <header th:replace="index::header"></header>
+    <header th:replace="~{index::header}"></header>
 
     <section>
       <h2>Admin</h2>
@@ -74,6 +74,7 @@
       <tr>
         <th>Tuotteen nimi</th>
         <th>Tuotteen hinta</th>
+        <th>Tuotteen kuvaus</th>
         <th>Osasto</th>
         <th>Valmistaja</th>
         <th>Toimittaja</th>
@@ -83,6 +84,7 @@
       <tr th:each="tuote : ${tuotteet}">
         <td th:text="${tuote.nimi}">nimi</td>
         <td th:text="${tuote.hinta}">hinta</td>
+        <td th:utext="${tuote.kuvaus}">hinta</td>
         <td th:text="${tuote.osasto?.nimi}">osasto</td>
         <td th:text="${tuote.valmistaja?.nimi}">valmistaja</td>
 

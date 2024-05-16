@@ -4,48 +4,26 @@
   xmlns="http://www.w3.org/1999/xhtml"
   xmlns:th="http://www.thymeleaf.org"
 >
-  <head th:replace="index::head"> </head>
+  <head th:replace="~{index::head}"> </head>
 
   <body>
-    <header th:replace="index::header"></header>
-
-    <a th:href="@{/}"></a>
+    <header th:replace="~{index::header}"></header>
+    <h1>Kahvilaitteet</h1>
     <section class="grid-images">
-      <div class="card" th:each="tuote : ${tuotteet}">
-        <figure>
-          <img th:src="@{/images/__${tuote.kuva}__}" alt="CoffeeDevice" />
-        </figure>
+      <div class="card" th:each="tuote : ${kahvilaitteet}">
         <div class="content">
+          <figure>
+            <img th:src="@{/kuva/{id}(id=${tuote.id})}" alt="kuva" />
+          </figure>
           <p th:text="${tuote.nimi}"></p>
           <p th:text="${tuote.hinta}"></p>
-          <p th:utext="${tuote.kuvaus}"></p>
-
-          <button>
-            <a th:href="@{url}">Katso lisätiedot</a>
-          </button>
+          <p>
+            <a th:href="@{/tuote/{id}(id=${tuote.id})}">Näytä</a>
+          </p>
         </div>
       </div>
     </section>
-    <!-- <h1>Devices</h1>
-    <table>
-      <tr>
-        <th>Image</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Price</th>
-      </tr>
-      <tr th:each="device : ${devices}">
-        <td>
-          <img
-            th:src="'data:image/jpeg;base64,' + ${#strings.toEncodedString(device.image, 'base64')}"
-            width="100"
-          />
-        </td>
-        <td th:text="${device.name}"></td>
-        <td th:text="${device.description}"></td>
-        <td th:text="${device.price}"></td>
-      </tr>
-    </table> -->
+
     <footer><p>@copyright madhu's cafe</p></footer>
   </body>
 </html>

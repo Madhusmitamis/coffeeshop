@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head th:replace="~{index::head}">
+    <!-- <title>CoffeeShop</title>
+    <link rel="stylesheet" type="text/css" th:href="@{css/reset.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{css/style.css}" /> -->
+  </head>
+
+  <body>
+    <header th:replace="~{index::header}"></header>
+
+    <h1>Laiteidentiedot</h1>
+    <div class="product-details">
+      <figure>
+        <img th:src="@{/kuva/{id}(id=${tuote.id})}" alt="kuva" />
+      </figure>
+      <p th:text="${tuote.nimi}"></p>
+      <p th:text="${tuote.hinta}"></p>
+      <p th:text="${tuote.kuvaus}"></p>
+    </div>
+    <a th:href="@{/kahvilaitteet}">Palaa kahvilaitteet sivulle</a>
+    <footer><p>@copyright madhu's cafe</p></footer>
+  </body>
+</html>

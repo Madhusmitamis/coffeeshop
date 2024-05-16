@@ -2,6 +2,7 @@ package com.example.coffeeshop;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,28 +10,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class TuoteController {
-    @Autowired
-    private ToimittajaRepository toimittajaRepository;
-    @Autowired
-    private ValmistajaRepository valmistajaRepository;
-    @Autowired
-    private OsastoRepository osastoRepository;
-    @Autowired
-    private TuoteRepository tuoteRepository;
+
     @Autowired
     private TuoteService tuoteService;
 
     @GetMapping("/admin")
     public String tuote(Model model) {
         model.addAttribute("osastot", tuoteService.findAllDepartments());
-        model.addAttribute("toimittajat", toimittajaRepository.findAll());
-        model.addAttribute("valmistajat", valmistajaRepository.findAll());
+        model.addAttribute("toimittajat", tuoteService.findAllToimittajat());
+        model.addAttribute("valmistajat", tuoteService.findAllValmistajat());
         model.addAttribute("tuotteet", tuoteService.findAllProducts());
         return "admin";
     }
@@ -79,4 +74,11 @@ public class TuoteController {
         return "redirect:/admin";
     }
 
+    // @GetMapping("/admin")
+    // public String getProductsWithSpecificIds(Model model) {
+    // List<Tuote> tuotteet =
+    // tuoteService.getProductsByDepartmentAndSubDepartment(1L, 1L);
+    // model.addAttribute("products", tuotteet);
+    // return "kahvilaitteet";
+    // }
 }

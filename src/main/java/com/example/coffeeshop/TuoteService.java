@@ -21,6 +21,10 @@ public class TuoteService {
         return tuoteRepository.findAll();
     }
 
+    // public List<Tuote> findKahvilaitteet() {
+    // return tuoteRepository.findKahvilaitteet();
+    // }
+
     public Tuote findProductById(Long id) {
         return tuoteRepository.findById(id).orElse(null);
     }
@@ -28,6 +32,17 @@ public class TuoteService {
     public List<Osasto> findAllDepartments() {
         return osastoRepository.findAll();
     }
+
+    // public List<Tuote> findProductsByOsastoID(Long osastoID) {
+    // return tuoteRepository.findProductsByOsastoID(osastoID);
+    // }
+    public List<Tuote> getProductForKahvilaitteet() {
+        return tuoteRepository.findProductsByOsastoID(1L);
+    }
+
+    // public List<Tuote> getProductForKulutustuotteet() {
+    // return tuoteRepository.findProductsByOsastoID("Kulutustuotteet");
+    // }
 
     public List<Valmistaja> findAllValmistajat() {
         return valmistajaRepository.findAll();
@@ -43,7 +58,7 @@ public class TuoteService {
         Valmistaja v = valmistajaRepository.findById(valmistajaid).orElse(null);
         Osasto o = osastoRepository.findById(osastoid).orElse(null);
         Toimittaja t = toimittajaRepository.findById(toimittajaid).orElse(null);
-        Tuote tuote = tuoteRepository.existsByNimi(nimi);
+        Tuote tuote = tuoteRepository.findByNimi(nimi);
         if (tuote != null) {
             return tuote;
 
@@ -83,5 +98,11 @@ public class TuoteService {
     public void deleteTuote(Long id) {
         tuoteRepository.deleteById(id);
     }
+
+    // public List<Tuote> getProductsByDepartmentAndSubDepartment(long departmentId,
+    // long subDepartmentId) {
+    // return tuoteRepository.findByOsastoIdAndOsastoIdp(departmentId,
+    // subDepartmentId);
+    // }
 
 }

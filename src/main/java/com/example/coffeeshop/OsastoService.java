@@ -18,6 +18,14 @@ public class OsastoService {
         return osastoRepository.findById(id).orElse(null);
     }
 
+    public boolean existsByNimi(String nimi) {
+        return osastoRepository.existsByNimi(nimi);
+    }
+
+    public Osasto save(Osasto osasto) {
+        return osastoRepository.save(osasto);
+    }
+
     public void createOsasto(String nimi, Long osastoIdp) {
         if (osastoRepository.existsByNimi(nimi)) {
             throw new IllegalArgumentException("Department with name " + nimi + " already exists.");
@@ -42,4 +50,5 @@ public class OsastoService {
         osastoRepository.deleteById(id);
         // You might want to handle related entities before deletion
     }
+
 }
