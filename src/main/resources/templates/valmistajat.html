@@ -8,6 +8,12 @@
 
   <body>
     <header th:replace="~{index::header}"></header>
+    <section
+      th:if="${message}"
+      th:class="${message.startsWith('Valmistaja poistettiin')? 'successMessage' : 'errorMessage'}"
+    >
+      <p th:text="${message}"></p>
+    </section>
 
     <h2>Admin</h2>
     <section>
@@ -68,7 +74,9 @@
         </td>
       </tr>
     </table>
-
+    <form th:action="@{/logout}" method="post">
+      <input type="submit" value="Sign Out" />
+    </form>
     <footer><p>@copyright madhu's cafe</p></footer>
   </body>
 </html>

@@ -13,18 +13,18 @@
   <body>
     <header th:replace="~{index::header}"></header>
 
-    <h1>Laiteidentiedot</h1>
-    <div class="product-details">
-      <figure>
-        <img th:src="@{/kuva/{id}(id=${tuote.id})}" alt="kuva" />
-      </figure>
-      <p th:text="${tuote.nimi}"></p>
-      <p th:text="${tuote.hinta}"></p>
-      <p th:text="${tuote.kuvaus}"></p>
-    </div>
-    <form th:action="@{/logout}" method="post">
-      <input type="submit" value="Sign Out" />
+    <div th:if="${param.error}">Invalid username and password.</div>
+    <div th:if="${param.logout}">You have been logged out.</div>
+    <form th:action="@{/login}" method="post">
+      <div>
+        <label> User Name : <input type="text" name="username" /> </label>
+      </div>
+      <div>
+        <label> Password: <input type="password" name="password" /> </label>
+      </div>
+      <div><input type="submit" value="Sign In" /></div>
     </form>
+
     <footer><p>@copyright madhu's cafe</p></footer>
   </body>
 </html>

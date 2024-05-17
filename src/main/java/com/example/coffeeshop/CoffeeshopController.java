@@ -47,7 +47,8 @@ public class CoffeeshopController {
     }
 
     @GetMapping("/kulutustuotteet")
-    public String product() {
+    public String kulutustuotteet(Model model) {
+        model.addAttribute("kulutustuotteet", tuoteService.getProductForKulutustuotteet());
         return "kulutustuotteet";
     }
 

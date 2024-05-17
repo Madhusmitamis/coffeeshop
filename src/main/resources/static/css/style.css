@@ -14,9 +14,9 @@ header {
 
   display: flex;
   /* flex-direction: row; */
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   padding: 4rem;
-  justify-content: space-around;
+  justify-content: right;
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
@@ -59,11 +59,13 @@ h2 {
     color: green;
   }
 }
-
+nav {
+  position: fixed;
+}
 nav ul {
   /* list-style-type: none; */
   display: flex;
-  /* position: fixed; */
+  /* position: fixed;  */
   /* flex-direction: row;
   flex-wrap: wrap; */
 }
@@ -105,9 +107,7 @@ nav ul li a {
 .bold {
   font-weight: 700;
 }
-.italic {
-  font-style: italic;
-}
+
 .card p,
 .card figure {
   margin-block-end: 1rem;
@@ -134,16 +134,17 @@ h3 {
   grid-gap: 1rem;
   margin: 3rem;
   grid-template-columns: auto auto auto;
+  /* width: 50%; */
 }
 
 .card {
   /* Ensure each card takes up the entire grid cell */
   width: 100%;
-  margin: 20px;
+  margin: 10px;
 }
-img {
+.product-details img {
   width: 30%;
-  /* padding-inline-start: 4rem; */
+  padding-inline-start: 4rem;
   padding-block-start: 4rem;
 }
 p {
@@ -167,12 +168,12 @@ form {
 table {
   width: 100%;
   margin-inline-start: 2rem;
-  text-align: center;
+  /* text-align: center; */
 }
-table td,
-th {
+table td {
   border: 1px solid black;
   border-collapse: collapse;
+  text-align: center;
 }
 table th {
   padding-top: 12px;
@@ -180,6 +181,7 @@ table th {
   text-align: center;
   background-color: burlywood;
   color: white;
+  border: 1px solid black;
 }
 button {
   background-color: burlywood;
@@ -187,13 +189,26 @@ button {
   border: #fff;
   border-radius: 2px;
   padding: 1rem;
+  margin-inline-start: 1rem;
+  margin-block-start: 4rem;
   margin-block-end: 2rem;
-  margin-inline-start: 2rem;
 }
 button a {
   color: white;
   padding: 1rem;
   text-decoration: none;
+}
+.successMessage {
+  border: 1px solid green;
+  margin-block-start: 2rem;
+  padding-block-end: 2rem;
+  color: green;
+}
+.errorMessage {
+  border: 1px solid red;
+  margin-block-start: 2rem;
+  padding-block-end: 2rem;
+  color: red;
 }
 
 footer {

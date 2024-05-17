@@ -8,102 +8,25 @@
 
   <body>
     <header th:replace="~{index::header}"></header>
-
+    <h1>Kulutustuotteet</h1>
     <section class="grid-images">
-       <div class="card">
+      <div class="card" th:each="tuote : ${kulutustuotteet}">
+        <div class="content">
           <figure>
-            <!-- <img th:src="@{/images/pic1.jpg}" alt="CoffeeDevice" /> -->
+            <img th:src="@{/kuva/{id}(id=${tuote.id})}" alt="kuva" />
           </figure>
-          <div class="content">
-            <p class="bold">Lorem ipsum dolorsit amet.</p>
-            <p class="italic">HTML, CSS, JavaScript</p>
-            <p>
-              <a th:href="@{/laitteet}">See more</a>
-            </p>
-          </div>
-        </div>
-        <div class="card">
-          <figure>
-            <img th:src="@{/images/pic2.jpg}" alt="CoffeeMachine" />
-          </figure>
-          <div class="content">
-            <p class="bold">Lorem ipsum dolorsit amet.</p>
-            <p class="italic">UX design layouts</p>
-            <p><a th:href="@{/laittet}">See more</a></p>
-          </div>
-        </div>
-        <div class="card">
-          <figure>
-            <img th:src="@{/images/pic3.jpg}" alt="coffeeMachine" />
-          </figure>
-          <div class="content">
-            <p class="bold">Lorem ipsum dolorsit amet.</p>
-            <p class="italic">ReactJS, Node JS</p>
-            <p><a th:href="@{url}">See more</a></p>
-          </div>
-        </div>
-        <div class="card">
-          <figure>
-            <img th:src="@{/images/device1.jpg}" alt="coffeeMachine" />
-          </figure>
-          <div class="content">
-            <p class="bold">Lorem ipsum dolorsit amet.</p>
-            <p class="italic">ReactJS, Node JS</p>
-            <p><a th:href="@{url}">See more</a></p>
-          </div>
-        </div>
-        <div class="card">
-          <figure>
-            <img th:src="@{/images/device2.jpg}" alt="coffeeMachine" />
-          </figure>
-          <div class="content">
-            <p class="bold">Lorem ipsum dolorsit amet.</p>
-            <p class="italic">ReactJS, Node JS</p>
-            <p><a th:href="@{url}">See more</a></p>
-          </div>
-        </div>
-        <div class="card">
-          <figure>
-            <img th:src="@{/images/device3.jpg}" alt="coffeeMachine" />
-          </figure>
-          <div class="content">
-            <p class="bold">Lorem ipsum dolorsit amet.</p>
-            <p class="italic">ReactJS, Node JS</p>
-            <p><a th:href="@{url}">See more</a></p>
-          </div>
-        </div>
-          <div class="card">
-            <figure>
-              <img th:src="@{/images/device4.jpg}" alt="coffeeMachine" />
-            </figure>
-            <div class="content">
-              <p class="bold">Lorem ipsum dolorsit amet.</p>
-              <p class="italic">ReactJS, Node JS</p>
-              <p><a th:href="@{url}">See more</a></p>
-            </div>
-          </div>
-            <div class="card">
-              <figure>
-                <img th:src="@{/images/device5.jpg}" alt="coffeeMachine" />
-              </figure>
-              <div class="content">
-                <p class="bold">Lorem ipsum dolorsit amet.</p>
-                <p class="italic">ReactJS, Node JS</p>
-                <p><a th:href="@{url}">See more</a></p>
-              </div>
-            </div>
-              <div class="card">
-                <figure>
-                  <img th:src="@{/images/device6.jpg}" alt="coffeeMachine" />
-                </figure>
-                <div class="content">
-                  <p class="bold">Lorem ipsum dolorsit amet.</p>
-                  <p class="italic">ReactJS, Node JS</p>
-                  <p><a th:href="@{url}">See more</a></p>
-                </div>
+          <p th:text="${tuote.nimi}"></p>
+          <p th:text="${tuote.hinta}"></p>
+          <p>
+            <a th:href="@{/tuote/{id}(id=${tuote.id})}">Näytä</a>
+          </p>
         </div>
       </div>
     </section>
+    <form th:action="@{/logout}" method="post">
+      <input type="submit" value="Sign Out" />
+    </form>
+
     <footer><p>@copyright madhu's cafe</p></footer>
   </body>
 </html>

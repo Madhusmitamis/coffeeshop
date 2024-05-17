@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 public class ValmistajaService {
     @Autowired
     ValmistajaRepository valmistajaRepository;
+
     @Autowired
-    private TuoteRepository tuoteRepository;
 
     public List<Valmistaja> findAllValmistajat() {
         return valmistajaRepository.findAll();

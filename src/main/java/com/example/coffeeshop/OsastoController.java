@@ -7,13 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class OsastoController {
-    @Autowired
-    private OsastoRepository osastoRepository;
-    @Autowired
-    private TuoteRepository tuoteRepository;
+
     @Autowired
     private OsastoService osastoService;
 
@@ -57,9 +55,16 @@ public class OsastoController {
     }
 
     @PostMapping("/poistaOsasto/{id}")
-    public String poistaOsasto(@PathVariable Long id) {
-        osastoService.deleteOsasto(id);
-        // You might want to handle related entities before deletion
+    public String poistaOsasto(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        String message;
+        try {
+            // Delete the supplier by ID
+            osastoService.deleteOsasto(id);
+            message = "Osasto poistettiin onnistunneesti tietokannasta";
+        } catch (Exception e) {
+            message = "Osasto ei voitu poista, koska siihen liittyy tuotteita tietokannassa.";
+        }
+        redirectAttributes.addFlashAttribute("message", message);
         return "redirect:/osastot";
     }
 

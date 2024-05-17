@@ -29,7 +29,13 @@
       <input type="text" name="nimi" required />
 
       <label for="hinta">Tuotteen hinta:</label>
-      <input type="text" name="hinta" required />
+      <input
+        type="text"
+        name="hinta"
+        placeholder="xxx.xx"
+        pattern="\d+(\.\d{2})?"
+        required
+      />
 
       <label for="kuvaus">Tuotteen kuvaus:</label>
       <textarea rows="5" name="kuvaus" required></textarea>
@@ -106,6 +112,11 @@
         </td>
       </tr>
     </table>
+    <button>
+      <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out" />
+      </form>
+    </button>
 
     <footer><p>@copyright madhu's cafe</p></footer>
   </body>

@@ -22,4 +22,7 @@ public interface TuoteRepository extends JpaRepository<Tuote, Long> {
         @Query("SELECT t FROM Tuote t JOIN FETCH t.osasto o WHERE o.id = :osastoID OR o.osastoIdp = :osastoID")
         List<Tuote> findProductsByOsastoID(@Param("osastoID") Long osastoID);
 
+        // List<Tuote> findProductsByOsastoID(@Param("osastoID") Long osastoID
+        // @Param("osastoIdp")Long osastoIdp);
+
 }

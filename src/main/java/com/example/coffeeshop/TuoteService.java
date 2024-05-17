@@ -21,10 +21,6 @@ public class TuoteService {
         return tuoteRepository.findAll();
     }
 
-    // public List<Tuote> findKahvilaitteet() {
-    // return tuoteRepository.findKahvilaitteet();
-    // }
-
     public Tuote findProductById(Long id) {
         return tuoteRepository.findById(id).orElse(null);
     }
@@ -33,16 +29,19 @@ public class TuoteService {
         return osastoRepository.findAll();
     }
 
-    // public List<Tuote> findProductsByOsastoID(Long osastoID) {
-    // return tuoteRepository.findProductsByOsastoID(osastoID);
-    // }
     public List<Tuote> getProductForKahvilaitteet() {
         return tuoteRepository.findProductsByOsastoID(1L);
     }
 
-    // public List<Tuote> getProductForKulutustuotteet() {
-    // return tuoteRepository.findProductsByOsastoID("Kulutustuotteet");
-    // }
+    public List<Tuote> getProductForKulutustuotteet() {
+        List<Tuote> productsForOsastoId2 = tuoteRepository.findProductsByOsastoID(2L);
+        List<Tuote> productsForOsastoId7 = tuoteRepository.findProductsByOsastoID(7L);
+
+        // Combine the two lists
+        productsForOsastoId2.addAll(productsForOsastoId7);
+
+        return productsForOsastoId2;
+    }
 
     public List<Valmistaja> findAllValmistajat() {
         return valmistajaRepository.findAll();

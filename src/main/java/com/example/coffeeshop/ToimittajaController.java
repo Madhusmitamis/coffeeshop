@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class ToimittajaController {
@@ -66,9 +67,16 @@ public class ToimittajaController {
     }
 
     @PostMapping("/poistaToimittaja/{id}")
-    public String poistaToimittaja(@PathVariable Long id) {
-        // Delete the supplier by ID
-        toimittajaService.deleteToimittaja(id);
+    public String poistaToimittaja(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        String message;
+        try {
+            // Delete the supplier by ID
+            toimittajaService.deleteToimittaja(id);
+            message = "Toimittaja poistettiin onnistunneesti tietokannasta";
+        } catch (Exception e) {
+            message = "Toimittaja ei voitu poista, koska siihen liittyy tuotteita tietokannassa.";
+        }
+        redirectAttributes.addFlashAttribute("message", message);
         return "redirect:/toimittajat";
     }
 }

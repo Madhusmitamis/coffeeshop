@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.ui.Model;
 
 @Controller
@@ -52,19 +53,21 @@ public class ValmistajaController {
     public String paivitaValmistaja(@PathVariable Long id, @RequestParam String nimi, @RequestParam String url) {
         valmistajaService.updateValmistaja(id, nimi, url);
         return "redirect:/valmistajat";
-        // Valmistaja valmistaja = valmistajaRepository.findById(id).orElse(null);
-        // if (valmistaja == null) {
-        // return "redirect:/valmistajat?error=ManufacturerNotFound";
-        // }
-        // valmistaja.setNimi(nimi);
-        // valmistaja.setUrl(url);
-        // valmistajaRepository.save(valmistaja);
-        // return "redirect:/valmistajat";
+
     }
 
     @PostMapping("/poistaValmistaja/{id}")
-    public String poistaValmistaja(@PathVariable Long id) {
-        valmistajaService.deleteValmistaja(id);
+    public String poistaValmistaja(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        String message;
+        try {
+            // Delete the supplier by ID
+            valmistajaService.deleteValmistaja(id);
+            message = "Valmistaja poistettiin onnistunneesti tietokannasta";
+        } catch (Exception e) {
+            message = "Valmistaja ei voitu poista, koska siihen liittyy tuotteita tietokannassa.";
+        }
+        redirectAttributes.addFlashAttribute("message", message);
+
         return "redirect:/valmistajat";
 
     }
