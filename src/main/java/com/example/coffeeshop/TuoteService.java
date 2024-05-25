@@ -4,8 +4,7 @@ import java.util.List;
 
 import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -44,18 +43,6 @@ public class TuoteService {
 
         return productsForOsastoId2;
     }
-
-    // public Page<Tuote> getKahvilaitteet(Pageable pageable) {
-    // return tuoteRepository.findProductsByOsastoID(1L, pageable);
-    // }
-
-    // public Page<Tuote> findByOsastoId(long osastoId, Pageable pageable) {
-    // return tuoteRepository.findByOsastoId(osastoId, pageable);
-    // }
-
-    // public Tuote findProductById(long id) {
-    // return tuoteRepository.findById(id).orElse(null);
-    // }
 
     public List<Valmistaja> findAllValmistajat() {
         return valmistajaRepository.findAll();
