@@ -21,6 +21,8 @@ header {
   background-repeat: no-repeat;
   background-size: cover;
   max-width: 100%;
+  height: 45rem;
+  background-position: center;
 }
 /* header + .indexcard {
   padding-top: 102px;
@@ -153,9 +155,10 @@ p {
   padding-block-start: 2rem;
 }
 h1 {
-  padding-block-start: 4rem;
-  padding-inline-start: 4rem;
+  /* padding-block-start: 4rem;
+  padding-inline-start: 4rem; */
   font-size: 4rem;
+  align-self: center;
 }
 form {
   display: flex;

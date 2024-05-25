@@ -20,3 +20,6 @@ Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: The connection wa
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
 	... 16 more
+2024-05-17 14:49:05.981637+03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "KUVAUS CHARACTER VARYING(2000)": "U&'Ominaisuudet\\000d\\000aiPad 10,2"" (2021) avaa portit viihteen maailmaan. Katse... (2949)"; SQL statement:
+insert into tuote (hinta,kuva,kuvaus,nimi,osasto_id,toimittaja_id,valmistaja_id,id) values (?,?,?,?,?,?,?,?) [22001-224]

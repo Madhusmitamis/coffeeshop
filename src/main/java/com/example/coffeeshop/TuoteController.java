@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import org.springframework.web.bind.annotation.RequestParam;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -67,17 +66,19 @@ public class TuoteController {
         return "redirect:/admin";
     }
 
+    // @GetMapping("/kahvilaitteet")
+    // public String showProductsPage(@RequestParam(defaultValue = "1") int page,
+    // Model model) {
+    // int pageSize = 9; // 3 products per row * 3 rows per page
+    // Page<Tuote> productPage = tuoteService.getProductsPage(page, pageSize);
+    // model.addAttribute("productPage", productPage);
+    // return "kahvilaitteet";
+    // }
+
     @PostMapping("/poistaTuote/{id}")
     public String poistaTuote(@PathVariable Long id) {
         tuoteService.deleteTuote(id);
         return "redirect:/admin";
     }
 
-    // @GetMapping("/admin")
-    // public String getProductsWithSpecificIds(Model model) {
-    // List<Tuote> tuotteet =
-    // tuoteService.getProductsByDepartmentAndSubDepartment(1L, 1L);
-    // model.addAttribute("products", tuotteet);
-    // return "kahvilaitteet";
-    // }
 }

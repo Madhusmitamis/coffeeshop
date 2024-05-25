@@ -10,7 +10,7 @@
     <header th:replace="~{index::header}"></header>
     <h1>Kulutustuotteet</h1>
     <section class="grid-images">
-      <div class="card" th:each="tuote : ${kulutustuotteet}">
+      <div class="card" th:each="tuote : ${tuotteet}">
         <div class="content">
           <figure>
             <img th:src="@{/kuva/{id}(id=${tuote.id})}" alt="kuva" />
@@ -23,6 +23,18 @@
         </div>
       </div>
     </section>
+
+    <div th:if="${currentPage > 0}">
+      <a th:href="@{/kahviLaitteet(page=${currentPage - 1})}">
+        <button class="edellinen">Edellinen</button>
+      </a>
+    </div>
+
+    <div th:if="${currentPage != null and currentPage &lt; totalPages - 1}">
+      <a th:href="@{/kahviLaitteet(page=${currentPage + 1})}">
+        <button class="seurava">Seuraava</button>
+      </a>
+    </div>
     <form th:action="@{/logout}" method="post">
       <input type="submit" value="Sign Out" />
     </form>
