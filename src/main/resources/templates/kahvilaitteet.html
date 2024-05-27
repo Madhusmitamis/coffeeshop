@@ -10,7 +10,7 @@
     <header th:replace="~{index::header}"></header>
     <h2>Kahvilaitteet</h2>
     <section class="grid-images">
-      <div class="card" th:each="tuote : ${kahvilaitteet}">
+      <div class="card" th:each="tuote : ${tuotteet}">
         <div class="content">
           <figure>
             <img th:src="@{/kuva/{id}(id=${tuote.id})}" alt="kuva" />
@@ -23,30 +23,24 @@
         </div>
       </div>
     </section>
-    <!-- <div th:if="${totalPages > 1}">
-        <div th:if="${currentPage > 0}">
-            <a th:href="@{/kahviLaitteet(id=${osastoId}, page=${currentPage - 1})}">
-                <button class="edellinen">Edellinen</button>
-            </a>
-        </div>
-        <div th:if="${currentPage < totalPages - 1}">
-            <a th:href="@{/kahviLaitteet(id=${osastoId}, page=${currentPage + 1})}">
-                <button class="seurava">Seuraava</button>
-            </a>
-        </div>
-    </div> -->
+
+    <div th:if="${currentPage > 0}">
+      <a th:href="@{/kahviLaitteet(page=${currentPage - 1})}">
+        <button class="edellinen">Edellinen</button>
+      </a>
+    </div>
+
+    <div th:if="${currentPage != null and currentPage &lt; totalPages - 1}">
+      <a th:href="@{/kahviLaitteet(page=${currentPage + 1})}">
+        <button class="seurava">Seuraava</button>
+      </a>
+    </div>
     <form th:action="@{/logout}" method="post">
       <input type="submit" value="Sign Out" />
     </form>
 
     <footer>
       <p>@copyright madhu's cafe</p>
-      <!-- Total Items [[${totalItems}]] : Page [[${currentPage}]] of
-      [[${totalPages}]] &nbsp; &nbsp; - &nbsp;
-      <span th:each="i: ${#numbers.sequence(1, totalPages)}">
-        <a th:href="@{'/kahvilaitteet/page/' + ${i}}">[[${i}]]</a>
-        &nbsp; &nbsp;
-      </span> -->
     </footer>
   </body>
 </html>

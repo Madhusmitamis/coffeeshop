@@ -3,13 +3,16 @@ package com.example.coffeeshop;
 import org.springframework.http.HttpHeaders;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class CoffeeshopController {
@@ -22,9 +25,15 @@ public class CoffeeshopController {
     }
 
     @GetMapping("/kahvilaitteet")
-    public String kahvilaitteet(Model model) {
-        model.addAttribute("kahvilaitteet",
-                tuoteService.getProductForKahvilaitteet());
+    public String kahvilaitteet(Model model, @RequestParam(defaultValue = "0") int page) {
+        int pageSize = 6;
+        Pageable pageable = PageRequest.of(page, pageSize);
+        Page<Tuote> tuotePage = tuoteService.getProductForKahvilaitteet(pageable);
+        model.addAttribute("totalPages", tuotePage.getTotalPages());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("pageNumber", page + 1);
+        model.addAttribute("tuotteet", tuotePage.getContent());
+
         return "kahvilaitteet";
     }
 
@@ -48,10 +57,22 @@ public class CoffeeshopController {
         }
     }
 
+    // @GetMapping("/kulutustuotteet")
+    // public String kulutustuotteet(Model model) {
+    // model.addAttribute("kulutustuotteet",
+    // tuoteService.getProductForKulutustuotteet());
+    // return "kulutustuotteet";
+    // }
     @GetMapping("/kulutustuotteet")
-    public String kulutustuotteet(Model model) {
-        model.addAttribute("kulutustuotteet",
-                tuoteService.getProductForKulutustuotteet());
+    public String kulutustuotteet(Model model, @RequestParam(defaultValue = "0") int page) {
+        int pageSize = 6;
+        Pageable pageable = PageRequest.of(page, pageSize);
+        Page<Tuote> tuotePage = tuoteService.getProductForKulutustuotteet(pageable);
+        model.addAttribute("totalPages", tuotePage.getTotalPages());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("pageNumber", page + 1);
+        model.addAttribute("tuotteet", tuotePage.getContent());
+
         return "kulutustuotteet";
     }
 

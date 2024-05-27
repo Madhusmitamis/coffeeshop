@@ -1,7 +1,9 @@
 package com.example.coffeeshop;
 
+import java.util.Arrays;
 import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -30,18 +32,23 @@ public class TuoteService {
         return osastoRepository.findAll();
     }
 
-    public List<Tuote> getProductForKahvilaitteet() {
-        return tuoteRepository.findProductsByOsastoID(1L);
+    public Page<Tuote> getProductForKahvilaitteet(Pageable pageable) {
+        return tuoteRepository.findProductsByOsastoID(1L, pageable);
     }
 
-    public List<Tuote> getProductForKulutustuotteet() {
-        List<Tuote> productsForOsastoId2 = tuoteRepository.findProductsByOsastoID(2L);
-        List<Tuote> productsForOsastoId7 = tuoteRepository.findProductsByOsastoID(7L);
+    // public List<Tuote> getProductForKulutustuotteet() {
+    // List<Tuote> productsForOsastoId2 =
+    // tuoteRepository.findProductsByOsastoID(2L);
+    // List<Tuote> productsForOsastoId7 =
+    // tuoteRepository.findProductsByOsastoID(7L);
 
-        // Combine the two lists
-        productsForOsastoId2.addAll(productsForOsastoId7);
+    // // Combine the two lists
+    // productsForOsastoId2.addAll(productsForOsastoId7);
 
-        return productsForOsastoId2;
+    // return productsForOsastoId2;
+    // }
+    public Page<Tuote> getProductForKulutustuotteet(Pageable pageable) {
+        return tuoteRepository.findProductsByOsastoIDIn(Arrays.asList(2L, 7L), pageable);
     }
 
     public List<Valmistaja> findAllValmistajat() {
