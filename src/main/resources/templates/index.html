@@ -27,42 +27,21 @@
         </ul>
       </nav>
 
-      <h1 class="mainheading">Welcome to Madhu's cafe</h1>
+      <h1 class="mainheading">Tervetuloa Madhun kahvikauppaan</h1>
     </header>
-    <section class="indexcard">
-      <div class="card">
-        <figure>
-          <img th:src="@{/images/pic1.jpg}" alt="CoffeeDevice" />
-        </figure>
-        <div>
-          <p class="bold">Coffee Machine</p>
-          <p class="italic">Filter Coffee Machine</p>
-          <p>
-            <a th:href="@{url}">Näytä</a>
-          </p>
-        </div>
-      </div>
-      <div class="card">
-        <figure>
-          <img th:src="@{/images/pic2.jpg}" alt="CoffeeMachine" />
-        </figure>
-        <div>
-          <p class="bold">Coffee Machine</p>
-          <p class="italic">Coffee Beans</p>
-          <p><a th:href="@{url}">Näytä</a></p>
-        </div>
-      </div>
-      <div class="card">
-        <figure>
-          <img th:src="@{/images/pic3.jpg}" alt="coffeeMachine" />
-        </figure>
-        <div>
-          <p class="bold">Coffee Machine</p>
-          <p class="italic">Home Made coffee</p>
-          <p><a th:href="@{url}">Näytä</a></p>
-        </div>
-      </div>
-    </section>
+    <main
+      style="
+        height: 35rem;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+      "
+    >
+      <a th:href="@{/vipCustomer}" style="font-size: 4rem"
+        >Rekisteröidy VIP Asiakkaaksi
+      </a>
+    </main>
+
     <footer><p>@copyright madhu's cafe</p></footer>
   </body>
 </html>

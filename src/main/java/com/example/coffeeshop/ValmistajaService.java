@@ -10,8 +10,6 @@ public class ValmistajaService {
     @Autowired
     ValmistajaRepository valmistajaRepository;
 
-    @Autowired
-
     public List<Valmistaja> findAllValmistajat() {
         return valmistajaRepository.findAll();
     }

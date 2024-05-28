@@ -9,6 +9,21 @@
   <body>
     <header th:replace="~{index::header}"></header>
     <h2>Kahvilaitteet</h2>
+
+    <form th:action="@{/}">
+      Search:
+      <input
+        type="text"
+        name="keyword"
+        id="keyword"
+        size="50"
+        th:value="${keyword}"
+        required
+      />
+      &nbsp;
+      <input type="submit" value="Search" />
+      &nbsp;
+    </form>
     <section class="grid-images">
       <div class="card" th:each="tuote : ${tuotteet}">
         <div class="content">

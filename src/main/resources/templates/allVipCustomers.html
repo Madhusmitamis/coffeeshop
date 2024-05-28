@@ -12,8 +12,9 @@
 
   <body>
     <header th:replace="~{index::header}"></header>
+
+    <h2>Admin</h2>
     <section>
-      <h2>Admin</h2>
       <ul>
         <button><a th:href="@{/admin}">Tuotteet</a></button>
         <button><a th:href="@{/toimittajat}">Toimittajat</a></button>
@@ -22,37 +23,31 @@
         <button><a th:href="@{/allVipCustomers}">Vip-asiakkaat</a></button>
       </ul>
     </section>
-    <h2>Muokkaa Toimittaja</h2>
-    <form
-      th:action="@{/muokkaToimittaja/{id}(id=${toimittaja.id})}"
-      method="post"
-    >
-      <input type="hidden" name="_method" value="post" />
-      <label for="nimi">Toimittajan nimi:</label>
-      <input type="text" name="nimi" th:value="${toimittaja.nimi}" required />
 
-      <label for="yhteyshenkilo">Yhteyshenkilo:</label>
-      <input
-        type="text"
-        name="yhteyshenkilo"
-        th:value="${toimittaja.yhteyshenkilo}"
-        required
-      />
+    <table>
+      <tr>
+        <th>Asiakkaan etunimi</th>
+        <th>Asiakkaan sukunimi</th>
+        <th>Asiakkaan sähköpostiosoite</th>
+        <!-- <th>Tuotteiden määrä valikoimassa</th> -->
 
-      <label for="yhteyshenkilonEmail">Yhteyshenkilön sähköposti:</label>
-      <input
-        type="email"
-        name="yhteyshenkilonEmail"
-        th:value="${toimittaja.yhteyshenkilonEmail}"
-        required
-      />
+        <th></th>
+      </tr>
+      <tr th:each="vipCustomer : ${vipCustomers}">
+        <td th:text="${vipCustomer.etunimi}">etunimi</td>
+        <td th:text="${vipCustomer.sukunimi}">sukunimi</td>
+        <td th:text="${vipCustomer.sahkopostiosoite}">sähköpostiosoite</td>
 
-      <button type="submit">Päivitä</button>
-    </form>
+        <td>
+          <button>
+            <a th:href="@{/poista/{id}(id=${vipCustomer.id})}">poista</a>
+          </button>
+        </td>
+      </tr>
+    </table>
     <form th:action="@{/logout}" method="post">
       <input type="submit" value="Sign Out" />
     </form>
-
     <footer><p>@copyright madhu's cafe</p></footer>
   </body>
 </html>

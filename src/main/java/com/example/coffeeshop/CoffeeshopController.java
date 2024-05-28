@@ -76,9 +76,4 @@ public class CoffeeshopController {
         return "kulutustuotteet";
     }
 
-    @GetMapping("/vipcustomers")
-    public String vipcustomer() {
-        return "vipcustomers";
-    }
-
 }
