@@ -21,7 +21,7 @@ public class VipCustomerController {
     @GetMapping("/allVipCustomers")
     public String allVipcustomer(Model model) {
         List<VipCustomer> vipCustomers = vipCustomerService.findAll();
-        model.addAttribute("vipcustomers", vipCustomers);
+        model.addAttribute("vipCustomers", vipCustomers);
         return "allVipCustomers";
     }
 
@@ -39,7 +39,7 @@ public class VipCustomerController {
 
         vipCustomerService.registerVipCustomers(etunimi, sukunimi, sahkopostiosoite);
 
-        return "redirect:/vipCustomer";
+        return "redirect:/allVipCustomers";
     }
 
     // @GetMapping("/muokkaa/{id}")

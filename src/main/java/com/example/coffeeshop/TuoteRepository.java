@@ -19,4 +19,7 @@ public interface TuoteRepository extends JpaRepository<Tuote, Long> {
         @Query("SELECT t FROM Tuote t JOIN FETCH t.osasto o WHERE o.id IN :osastoIDs OR o.osastoIdp IN :osastoIDs")
         Page<Tuote> findProductsByOsastoIDIn(@Param("osastoIDs") List<Long> osastoIDs, Pageable pageable);
         // Page<Tuote> findByOsastoId(long osastoId, Pageable pageable);
+
+        @Query("SELECT t FROM Tuote t WHERE LOWER(t.nimi)LIKE LOWER(CONCAT('%', :keyword, '%'))")
+        Page<Tuote> searchTuotteetByNimi(@Param("keyword") String keyword, Pageable pageable);
 }

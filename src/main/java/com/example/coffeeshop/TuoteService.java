@@ -3,6 +3,7 @@ package com.example.coffeeshop;
 import java.util.Arrays;
 import java.util.List;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,6 +101,11 @@ public class TuoteService {
         tuote.setOsasto(osasto);
 
         tuoteRepository.save(tuote);
+    }
+
+    public Page<Tuote> searchTuotteetByNimi(String keyword, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return tuoteRepository.searchTuotteetByNimi(keyword, pageable);
     }
 
     public void deleteTuote(Long id) {

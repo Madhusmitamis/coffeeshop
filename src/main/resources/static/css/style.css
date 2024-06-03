@@ -161,6 +161,14 @@ h1 {
   font-size: 4rem;
   align-self: center;
 }
+.editTuoteKuva {
+  height: 15rem;
+}
+.editTuoteKuva img {
+  max-width: 100%;
+  height: 100%;
+}
+
 form {
   display: flex;
   flex-direction: column;

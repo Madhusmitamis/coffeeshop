@@ -29,7 +29,7 @@
       method="POST"
       enctype="multipart/form-data"
     >
-      <figure>
+      <figure class="editTuoteKuva">
         <img th:src="${kuvaUrl}" alt="kuva" />
       </figure>
       <label for="nimi">Tuotteen nimi:</label>
@@ -47,6 +47,7 @@
           th:each="osasto : ${osastot}"
           th:value="${osasto.id}"
           th:text="${osasto.nimi}"
+          th:selected="${osasto.id == tuote.osasto.id}"
         >
           Valitse osasto
         </option>
@@ -58,6 +59,7 @@
           th:each="valmistaja : ${valmistajat}"
           th:value="${valmistaja.id}"
           th:text="${valmistaja.nimi}"
+          th:selected="${valmistaja.id == tuote.valmistaja.id}"
         >
           Valitse valmistaja
         </option>
@@ -69,6 +71,7 @@
           th:each="toimittaja : ${toimittajat}"
           th:value="${toimittaja.id}"
           th:text="${toimittaja.nimi}"
+          th:selected="${toimittaja.id == tuote.toimittaja.id}"
         >
           Valitse toimittaja
         </option>

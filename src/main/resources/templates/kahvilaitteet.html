@@ -10,19 +10,17 @@
     <header th:replace="~{index::header}"></header>
     <h2>Kahvilaitteet</h2>
 
-    <form th:action="@{/}">
-      Search:
+    <form th:action="@{/searchKahvilaitteet}" method="GET">
       <input
         type="text"
         name="keyword"
         id="keyword"
         size="50"
         th:value="${keyword}"
+        placeholder="Etsi laitteet"
         required
       />
-      &nbsp;
-      <input type="submit" value="Search" />
-      &nbsp;
+      <button type="submit">Hae</button>
     </form>
     <section class="grid-images">
       <div class="card" th:each="tuote : ${tuotteet}">
@@ -39,7 +37,7 @@
       </div>
     </section>
 
-    <div th:if="${currentPage > 0}">
+    <!-- <div th:if="${currentPage > 0}">
       <a th:href="@{/kahviLaitteet(page=${currentPage - 1})}">
         <button class="edellinen">Edellinen</button>
       </a>
@@ -48,6 +46,21 @@
     <div th:if="${currentPage != null and currentPage &lt; totalPages - 1}">
       <a th:href="@{/kahviLaitteet(page=${currentPage + 1})}">
         <button class="seurava">Seuraava</button>
+      </a>
+    </div> -->
+    <div th:if="${currentPage > 0}">
+      <a
+        th:href="@{/searchKahvilaitteet(keyword=${keyword}, page=${currentPage - 1}, size=${size})}"
+      >
+        <button class="edellinen">Edellinen</button>
+      </a>
+    </div>
+
+    <div th:if="${currentPage != null and currentPage < totalPages - 1}">
+      <a
+        th:href="@{/searchKahvilaitteet(keyword=${keyword}, page=${currentPage + 1}, size=${size})}"
+      >
+        <button class="seuraava">Seuraava</button>
       </a>
     </div>
     <form th:action="@{/logout}" method="post">

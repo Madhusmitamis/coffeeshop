@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import org.springframework.data.domain.Page;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
@@ -74,6 +75,33 @@ public class TuoteController {
     // model.addAttribute("productPage", productPage);
     // return "kahvilaitteet";
     // }
+    @GetMapping("/searchKahvilaitteet")
+    public String searchKahvilaitteet(@RequestParam("keyword") String keyword,
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "size", defaultValue = "10") int size,
+            Model model) {
+
+        Page<Tuote> tuotteetPage = tuoteService.searchTuotteetByNimi(keyword, page, size);
+        model.addAttribute("tuotteet", tuotteetPage.getContent());
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", tuotteetPage.getTotalPages());
+        return "kahvilaitteet"; // Return the name of your HTML file
+    }
+
+    @GetMapping("/searchKulutustuotteet")
+    public String searchKulutustuotteet(@RequestParam("keyword") String keyword,
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "size", defaultValue = "10") int size,
+            Model model) {
+
+        Page<Tuote> tuotteetPage = tuoteService.searchTuotteetByNimi(keyword, page, size);
+        model.addAttribute("tuotteet", tuotteetPage.getContent());
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", tuotteetPage.getTotalPages());
+        return "kulutustuotteet"; // Return the name of your HTML file
+    }
 
     @PostMapping("/poistaTuote/{id}")
     public String poistaTuote(@PathVariable Long id) {
