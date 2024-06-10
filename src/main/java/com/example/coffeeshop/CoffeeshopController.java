@@ -57,12 +57,6 @@ public class CoffeeshopController {
         }
     }
 
-    // @GetMapping("/kulutustuotteet")
-    // public String kulutustuotteet(Model model) {
-    // model.addAttribute("kulutustuotteet",
-    // tuoteService.getProductForKulutustuotteet());
-    // return "kulutustuotteet";
-    // }
     @GetMapping("/kulutustuotteet")
     public String kulutustuotteet(Model model, @RequestParam(defaultValue = "0") int page) {
         int pageSize = 6;
@@ -75,5 +69,12 @@ public class CoffeeshopController {
 
         return "kulutustuotteet";
     }
+
+    // @GetMapping("/")
+    // public String index(Model model) {
+    // long productCount = tuoteService.getTotalProducts();
+    // model.addAttribute("productCount", productCount);
+    // return "kahvilaitteet";
+    // }
 
 }

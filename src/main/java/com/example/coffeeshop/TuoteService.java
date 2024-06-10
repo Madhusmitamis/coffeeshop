@@ -108,6 +108,18 @@ public class TuoteService {
         return tuoteRepository.searchTuotteetByNimi(keyword, pageable);
     }
 
+    // public Long countKahvilaitteet() {
+    // return tuoteRepository.countProductsByOsasto("kahvilaitteet");
+    // }
+
+    // public Long countKulutustuotteet() {
+    // return tuoteRepository.countProductsByOsasto("kulutustuotteet");
+    // }
+
+    // public long getTotalProducts() {
+    // return tuoteRepository.count();
+    // }
+
     public void deleteTuote(Long id) {
         tuoteRepository.deleteById(id);
     }

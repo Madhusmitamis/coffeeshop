@@ -9,6 +9,13 @@
   <body>
     <header th:replace="~{index::header}"></header>
     <h1>Kulutustuotteet</h1>
+    <!-- <p
+      th:text="'Tuotteet sivulla: ' + ${kulutustuotteet.size()} + '/' + (${kaikkiKulutustuotteet != null ? kaikkiKulutustuotteet.size() : '0'})"
+    ></p> -->
+    <p
+      class="countOfProducts"
+      th:text="'Tuotteet yhdessä: ' + ${totalKahviLaitteet}"
+    ></p>
     <form th:action="@{/searchKulutustuotteet}" method="GET">
       <input
         type="text"
@@ -36,7 +43,7 @@
       </div>
     </section>
 
-    <!-- <div th:if="${currentPage > 0}">
+    <div th:if="${currentPage > 0}">
       <a th:href="@{/kulutustuotteet(page=${currentPage - 1})}">
         <button class="edellinen">Edellinen</button>
       </a>
@@ -46,8 +53,8 @@
       <a th:href="@{/kulutustuotteet(page=${currentPage + 1})}">
         <button class="seurava">Seuraava</button>
       </a>
-    </div> -->
-    <div th:if="${currentPage > 0}">
+    </div>
+    <!-- <div th:if="${currentPage > 0}">
       <a
         th:href="@{/searchKulutustuotteet(keyword=${keyword}, page=${currentPage - 1}, size=${size})}"
       >
@@ -61,7 +68,7 @@
       >
         <button class="seuraava">Seuraava</button>
       </a>
-    </div>
+    </div> -->
     <form th:action="@{/logout}" method="post">
       <input type="submit" value="Sign Out" />
     </form>
