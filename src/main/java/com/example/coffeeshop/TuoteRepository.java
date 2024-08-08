@@ -23,7 +23,9 @@ public interface TuoteRepository extends JpaRepository<Tuote, Long> {
         @Query("SELECT t FROM Tuote t WHERE LOWER(t.nimi)LIKE LOWER(CONCAT('%', :keyword, '%'))")
         Page<Tuote> searchTuotteetByNimi(@Param("keyword") String keyword, Pageable pageable);
 
-        // @Query("SELECT COUNT(t) FROM Tuote t JOIN t.osasto o WHERE o.nimi =
-        // :osastoNimi")
-        // Long countProductsByOsasto(@Param("osastoNimi") String osastoNimi);
+        @Query("SELECT COUNT(t) FROM Tuote t JOIN t.osasto o WHERE o.id = :osastoID OR o.osastoIdp = :osastoID")
+        Long countProductsByOsastoID(@Param("osastoID") Long osastoID);
+
+        @Query("SELECT COUNT(t) FROM Tuote t JOIN t.osasto o WHERE o.id IN :osastoIDs OR o.osastoIdp IN :osastoIDs")
+        Long countProductsByOsastoIDIn(@Param("osastoIDs") List<Long> osastoIDs);
 }

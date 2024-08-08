@@ -2,7 +2,13 @@ package com.example.coffeeshop;
 
 import org.springframework.http.HttpHeaders;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Sort;
+import org.springframework.data.domain.Sort;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -24,15 +30,41 @@ public class CoffeeshopController {
         return "index";
     }
 
+    // @GetMapping("/kahvilaitteet")
+    // public String kahvilaitteet(Model model, @RequestParam(defaultValue = "0")
+    // int page) {
+    // int pageSize = 6;
+    // Pageable pageable = PageRequest.of(page, pageSize);
+    // Page<Tuote> tuotePage = tuoteService.getProductForKahvilaitteet(pageable);
+    // model.addAttribute("totalPages", tuotePage.getTotalPages());
+    // model.addAttribute("currentPage", page);
+    // model.addAttribute("pageNumber", page + 1);
+    // model.addAttribute("tuotteet", tuotePage.getContent());
+
+    // List<Long> kahvilaitteetOsastoIds = Arrays.asList(1L);
+    // long totalKahvilaitteet =
+    // tuoteService.countTotalProducts(kahvilaitteetOsastoIds);
+    // model.addAttribute("totalKahvilaitteet", totalKahvilaitteet);
+
+    // return "kahvilaitteet";
+    // }
     @GetMapping("/kahvilaitteet")
-    public String kahvilaitteet(Model model, @RequestParam(defaultValue = "0") int page) {
+    public String kahvilaitteet(Model model, @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "asc") String sortDir) {
         int pageSize = 6;
-        Pageable pageable = PageRequest.of(page, pageSize);
+        Sort sort = Sort.by(Sort.Direction.fromString(sortDir), "hinta");
+        Pageable pageable = PageRequest.of(page, pageSize, sort);
         Page<Tuote> tuotePage = tuoteService.getProductForKahvilaitteet(pageable);
+
         model.addAttribute("totalPages", tuotePage.getTotalPages());
         model.addAttribute("currentPage", page);
         model.addAttribute("pageNumber", page + 1);
         model.addAttribute("tuotteet", tuotePage.getContent());
+        model.addAttribute("sortDir", sortDir);
+
+        List<Long> kahvilaitteetOsastoIds = Arrays.asList(1L);
+        long totalKahvilaitteet = tuoteService.countTotalProducts(kahvilaitteetOsastoIds);
+        model.addAttribute("totalKahvilaitteet", totalKahvilaitteet);
 
         return "kahvilaitteet";
     }
@@ -57,24 +89,44 @@ public class CoffeeshopController {
         }
     }
 
+    // @GetMapping("/kulutustuotteet")
+    // public String kulutustuotteet(Model model, @RequestParam(defaultValue = "0")
+    // int page) {
+    // int pageSize = 6;
+    // Pageable pageable = PageRequest.of(page, pageSize);
+    // Page<Tuote> tuotePage = tuoteService.getProductForKulutustuotteet(pageable);
+    // model.addAttribute("totalPages", tuotePage.getTotalPages());
+    // model.addAttribute("currentPage", page);
+    // model.addAttribute("pageNumber", page + 1);
+    // model.addAttribute("tuotteet", tuotePage.getContent());
+
+    // List<Long> kulutustuotteetOsastoIds = Arrays.asList(2L, 7L); // Replace with
+    // actual IDs if necessary
+    // long totalKulutustuotteet =
+    // tuoteService.countTotalProducts(kulutustuotteetOsastoIds);
+    // model.addAttribute("totalKulutustuotteet", totalKulutustuotteet);
+    // return "kulutustuotteet";
+
+    // }
     @GetMapping("/kulutustuotteet")
-    public String kulutustuotteet(Model model, @RequestParam(defaultValue = "0") int page) {
+    public String kulutustuotteet(Model model, @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "asc") String sortDir) {
         int pageSize = 6;
-        Pageable pageable = PageRequest.of(page, pageSize);
+        Sort sort = Sort.by(Sort.Direction.fromString(sortDir), "hinta");
+        Pageable pageable = PageRequest.of(page, pageSize, sort);
         Page<Tuote> tuotePage = tuoteService.getProductForKulutustuotteet(pageable);
+
         model.addAttribute("totalPages", tuotePage.getTotalPages());
         model.addAttribute("currentPage", page);
         model.addAttribute("pageNumber", page + 1);
         model.addAttribute("tuotteet", tuotePage.getContent());
+        model.addAttribute("sortDir", sortDir);
+
+        List<Long> kulutustuotteetOsastoIds = Arrays.asList(2L, 7L);
+        long totalKulutustuotteet = tuoteService.countTotalProducts(kulutustuotteetOsastoIds);
+        model.addAttribute("totalKulutustuotteet", totalKulutustuotteet);
 
         return "kulutustuotteet";
     }
-
-    // @GetMapping("/")
-    // public String index(Model model) {
-    // long productCount = tuoteService.getTotalProducts();
-    // model.addAttribute("productCount", productCount);
-    // return "kahvilaitteet";
-    // }
 
 }

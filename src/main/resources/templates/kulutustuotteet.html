@@ -9,13 +9,8 @@
   <body>
     <header th:replace="~{index::header}"></header>
     <h1>Kulutustuotteet</h1>
-    <!-- <p
-      th:text="'Tuotteet sivulla: ' + ${kulutustuotteet.size()} + '/' + (${kaikkiKulutustuotteet != null ? kaikkiKulutustuotteet.size() : '0'})"
-    ></p> -->
-    <p
-      class="countOfProducts"
-      th:text="'Tuotteet yhdessä: ' + ${totalKahviLaitteet}"
-    ></p>
+
+    <p th:text="'Tuotteita yhteensä: ' + ${totalKulutustuotteet}"></p>
     <form th:action="@{/searchKulutustuotteet}" method="GET">
       <input
         type="text"

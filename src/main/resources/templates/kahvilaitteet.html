@@ -9,10 +9,9 @@
   <body>
     <header th:replace="~{index::header}"></header>
     <h2>Kahvilaitteet</h2>
-    <!-- <p>Tuotteet yhdessä: <span th:text="${productCount}">0</span></p> -->
-    <!-- <p
-      th:text="'Laitteita sivulla: ' + ${kahvilaitteet.size()} + '/' + (${kaikkiKahvilaitteet != null ? kaikkiKahvilaitteet.size() : '0'})"
-    ></p> -->
+
+    <p th:text="'Tuotteita yhteensä: ' + ${totalKahvilaitteet}"></p>
+
     <form th:action="@{/searchKahvilaitteet}" method="GET">
       <input
         type="text"
@@ -24,7 +23,15 @@
         required
       />
       <button type="submit">Hae</button>
+      <label for="sortDir">Sort by price:</label>
+      <select name="sortDir" id="sortDir" onchange="this.form.submit()">
+        <option value="asc" th:selected="${sortDir == 'asc'}">Ascending</option>
+        <option value="desc" th:selected="${sortDir == 'desc'}">
+          Descending
+        </option>
+      </select>
     </form>
+
     <section class="grid-images">
       <div class="card" th:each="tuote : ${tuotteet}">
         <div class="content">
@@ -41,19 +48,8 @@
     </section>
 
     <div th:if="${currentPage > 0}">
-      <a th:href="@{/kahviLaitteet(page=${currentPage - 1})}">
-        <button class="edellinen">Edellinen</button>
-      </a>
-    </div>
-
-    <div th:if="${currentPage != null and currentPage &lt; totalPages - 1}">
-      <a th:href="@{/kahviLaitteet(page=${currentPage + 1})}">
-        <button class="seurava">Seuraava</button>
-      </a>
-    </div>
-    <!-- <div th:if="${currentPage > 0}">
       <a
-        th:href="@{/searchKahvilaitteet(keyword=${keyword}, page=${currentPage - 1}, size=${size})}"
+        th:href="@{/kahviLaitteet(page=${currentPage - 1}, sortDir=${sortDir})}"
       >
         <button class="edellinen">Edellinen</button>
       </a>
@@ -61,11 +57,12 @@
 
     <div th:if="${currentPage != null and currentPage < totalPages - 1}">
       <a
-        th:href="@{/searchKahvilaitteet(keyword=${keyword}, page=${currentPage + 1}, size=${size})}"
+        th:href="@{/kahviLaitteet(page=${currentPage + 1}, sortDir=${sortDir})}"
       >
-        <button class="seuraava">Seuraava</button>
+        <button class="seurava">Seuraava</button>
       </a>
-    </div> -->
+    </div>
+
     <form th:action="@{/logout}" method="post">
       <input type="submit" value="Sign Out" />
     </form>

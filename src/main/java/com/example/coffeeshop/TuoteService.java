@@ -33,23 +33,26 @@ public class TuoteService {
         return osastoRepository.findAll();
     }
 
+    // public Page<Tuote> getProductForKahvilaitteet(Pageable pageable, Sort sort) {
+    // Pageable sortedPageable = PageRequest.of(pageable.getPageNumber(),
+    // pageable.getPageSize(), sort);
+    // return tuoteRepository.findProductsByOsastoID(1L, sortedPageable);
+    // }
+
+    // public Page<Tuote> getProductForKulutustuotteet(Pageable pageable, Sort sort)
+    // {
+    // Pageable sortedPageable = PageRequest.of(pageable.getPageNumber(),
+    // pageable.getPageSize(), sort);
+    // return tuoteRepository.findProductsByOsastoIDIn(Arrays.asList(2L, 7L),
+    // sortedPageable);
+    // }
     public Page<Tuote> getProductForKahvilaitteet(Pageable pageable) {
         return tuoteRepository.findProductsByOsastoID(1L, pageable);
     }
 
-    // public List<Tuote> getProductForKulutustuotteet() {
-    // List<Tuote> productsForOsastoId2 =
-    // tuoteRepository.findProductsByOsastoID(2L);
-    // List<Tuote> productsForOsastoId7 =
-    // tuoteRepository.findProductsByOsastoID(7L);
-
-    // // Combine the two lists
-    // productsForOsastoId2.addAll(productsForOsastoId7);
-
-    // return productsForOsastoId2;
-    // }
     public Page<Tuote> getProductForKulutustuotteet(Pageable pageable) {
-        return tuoteRepository.findProductsByOsastoIDIn(Arrays.asList(2L, 7L), pageable);
+        return tuoteRepository.findProductsByOsastoIDIn(Arrays.asList(2L, 7L),
+                pageable);
     }
 
     public List<Valmistaja> findAllValmistajat() {
@@ -108,17 +111,10 @@ public class TuoteService {
         return tuoteRepository.searchTuotteetByNimi(keyword, pageable);
     }
 
-    // public Long countKahvilaitteet() {
-    // return tuoteRepository.countProductsByOsasto("kahvilaitteet");
-    // }
-
-    // public Long countKulutustuotteet() {
-    // return tuoteRepository.countProductsByOsasto("kulutustuotteet");
-    // }
-
-    // public long getTotalProducts() {
-    // return tuoteRepository.count();
-    // }
+    // total number of products
+    public long countTotalProducts(List<Long> osastoIds) {
+        return tuoteRepository.countProductsByOsastoIDIn(osastoIds);
+    }
 
     public void deleteTuote(Long id) {
         tuoteRepository.deleteById(id);
