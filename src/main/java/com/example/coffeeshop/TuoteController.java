@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -75,32 +76,72 @@ public class TuoteController {
     // model.addAttribute("productPage", productPage);
     // return "kahvilaitteet";
     // }
+    // @GetMapping("/searchKahvilaitteet")
+    // public String searchKahvilaitteet(@RequestParam("keyword") String keyword,
+    // @RequestParam(value = "page", defaultValue = "0") int page,
+    // @RequestParam(value = "size", defaultValue = "10") int size,
+    // Model model) {
+
+    // Page<Tuote> tuotteetPage = tuoteService.searchTuotteetByNimi(keyword, page,
+    // size, sort);
+    // model.addAttribute("tuotteet", tuotteetPage.getContent());
+    // model.addAttribute("keyword", keyword);
+    // model.addAttribute("currentPage", page);
+    // model.addAttribute("totalPages", tuotteetPage.getTotalPages());
+    // return "kahvilaitteet"; // Return the name of your HTML file
+    // }
+
+    // @GetMapping("/searchKulutustuotteet")
+    // public String searchKulutustuotteet(@RequestParam("keyword") String keyword,
+    // @RequestParam(value = "page", defaultValue = "0") int page,
+    // @RequestParam(value = "size", defaultValue = "10") int size,
+    // Model model) {
+
+    // Page<Tuote> tuotteetPage = tuoteService.searchTuotteetByNimi(keyword, page,
+    // size, sort);
+    // model.addAttribute("tuotteet", tuotteetPage.getContent());
+    // model.addAttribute("keyword", keyword);
+    // model.addAttribute("currentPage", page);
+    // model.addAttribute("totalPages", tuotteetPage.getTotalPages());
+    // model.addAttribute("sortDir", sortDir);
+    // return "kulutustuotteet"; // Return the name of your HTML file
+    // }
     @GetMapping("/searchKahvilaitteet")
     public String searchKahvilaitteet(@RequestParam("keyword") String keyword,
             @RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "size", defaultValue = "10") int size,
+            @RequestParam(value = "sortDir", defaultValue = "asc") String sortDir,
             Model model) {
-
-        Page<Tuote> tuotteetPage = tuoteService.searchTuotteetByNimi(keyword, page, size);
+        // Sort sort = Sort.by(Sort.Direction.fromString(sortDir), "hinta"); // or use
+        // another property for sorting
+        Sort.Direction direction = Sort.Direction.fromString(sortDir);
+        Sort sort = Sort.by(direction, "hinta");
+        Page<Tuote> tuotteetPage = tuoteService.searchTuotteetByNimi(keyword, page, size, sort);
         model.addAttribute("tuotteet", tuotteetPage.getContent());
         model.addAttribute("keyword", keyword);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", tuotteetPage.getTotalPages());
-        return "kahvilaitteet"; // Return the name of your HTML file
+        model.addAttribute("sortDir", sortDir);
+        return "kahvilaitteet";
     }
 
     @GetMapping("/searchKulutustuotteet")
     public String searchKulutustuotteet(@RequestParam("keyword") String keyword,
             @RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "size", defaultValue = "10") int size,
+            @RequestParam(value = "sortDir", defaultValue = "asc") String sortDir,
             Model model) {
-
-        Page<Tuote> tuotteetPage = tuoteService.searchTuotteetByNimi(keyword, page, size);
+        // Sort sort = Sort.by(Sort.Direction.fromString(sortDir), "hinta"); // or use
+        // another property for sorting
+        Sort.Direction direction = Sort.Direction.fromString(sortDir);
+        Sort sort = Sort.by(direction, "hinta");
+        Page<Tuote> tuotteetPage = tuoteService.searchTuotteetByNimi(keyword, page, size, sort);
         model.addAttribute("tuotteet", tuotteetPage.getContent());
         model.addAttribute("keyword", keyword);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", tuotteetPage.getTotalPages());
-        return "kulutustuotteet"; // Return the name of your HTML file
+        model.addAttribute("sortDir", sortDir);
+        return "kulutustuotteet";
     }
 
     @PostMapping("/poistaTuote/{id}")

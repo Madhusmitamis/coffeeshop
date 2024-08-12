@@ -34,14 +34,19 @@ public class TuoteService {
         return osastoRepository.findAll();
     }
 
-    public Page<Tuote> getProductForKahvilaitteet(Pageable pageable, Sort sort) {
-        Pageable sortedPageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sort);
-        return tuoteRepository.findProductsByOsastoID(1L, sortedPageable);
+    public Page<Tuote> getProductForKahvilaitteet(Pageable pageable) {
+        // Ensure that pageable already contains the sort information
+        List<Long> kahvilaitteetOsastoIds = Arrays.asList(1L);
+        return tuoteRepository.findProductsByOsastoIDIn(kahvilaitteetOsastoIds, pageable);
+
+        // return tuoteRepository.findProductsByOsastoID(1L, pageable);
     }
 
     public Page<Tuote> getProductForKulutustuotteet(Pageable pageable) {
-        return tuoteRepository.findProductsByOsastoIDIn(Arrays.asList(2L, 7L),
-                pageable);
+        List<Long> kulutustuotteetOsastoIds = Arrays.asList(2L, 7L);
+        // return tuoteRepository.findProductsByOsastoIDIn(Arrays.asList(2L, 7L),
+        // pageable);
+        return tuoteRepository.findProductsByOsastoIDIn(kulutustuotteetOsastoIds, pageable);
     }
 
     public List<Valmistaja> findAllValmistajat() {
@@ -95,8 +100,8 @@ public class TuoteService {
         tuoteRepository.save(tuote);
     }
 
-    public Page<Tuote> searchTuotteetByNimi(String keyword, int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
+    public Page<Tuote> searchTuotteetByNimi(String keyword, int page, int size, Sort sort) {
+        Pageable pageable = PageRequest.of(page, size, sort);
         return tuoteRepository.searchTuotteetByNimi(keyword, pageable);
     }
 
@@ -109,4 +114,8 @@ public class TuoteService {
         tuoteRepository.deleteById(id);
     }
 
+    public Page<Tuote> findProductsByOsastoIDs(List<Long> kulutustuotteetOsastoIds, Pageable pageable) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'findProductsByOsastoIDs'");
+    }
 }
