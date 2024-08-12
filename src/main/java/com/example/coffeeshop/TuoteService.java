@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import java.math.BigDecimal;
+import org.springframework.data.domain.Sort;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
@@ -33,21 +34,9 @@ public class TuoteService {
         return osastoRepository.findAll();
     }
 
-    // public Page<Tuote> getProductForKahvilaitteet(Pageable pageable, Sort sort) {
-    // Pageable sortedPageable = PageRequest.of(pageable.getPageNumber(),
-    // pageable.getPageSize(), sort);
-    // return tuoteRepository.findProductsByOsastoID(1L, sortedPageable);
-    // }
-
-    // public Page<Tuote> getProductForKulutustuotteet(Pageable pageable, Sort sort)
-    // {
-    // Pageable sortedPageable = PageRequest.of(pageable.getPageNumber(),
-    // pageable.getPageSize(), sort);
-    // return tuoteRepository.findProductsByOsastoIDIn(Arrays.asList(2L, 7L),
-    // sortedPageable);
-    // }
-    public Page<Tuote> getProductForKahvilaitteet(Pageable pageable) {
-        return tuoteRepository.findProductsByOsastoID(1L, pageable);
+    public Page<Tuote> getProductForKahvilaitteet(Pageable pageable, Sort sort) {
+        Pageable sortedPageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sort);
+        return tuoteRepository.findProductsByOsastoID(1L, sortedPageable);
     }
 
     public Page<Tuote> getProductForKulutustuotteet(Pageable pageable) {

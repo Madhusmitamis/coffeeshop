@@ -23,7 +23,7 @@
         required
       />
       <button type="submit">Hae</button>
-      <label for="sortDir">Sort by price:</label>
+      <label for="sortDir">Lajittele hinnan mukaan:</label>
       <select name="sortDir" id="sortDir" onchange="this.form.submit()">
         <option value="asc" th:selected="${sortDir == 'asc'}">Ascending</option>
         <option value="desc" th:selected="${sortDir == 'desc'}">
