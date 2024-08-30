@@ -114,8 +114,8 @@ public class TuoteService {
         tuoteRepository.deleteById(id);
     }
 
-    public Page<Tuote> findProductsByOsastoIDs(List<Long> kulutustuotteetOsastoIds, Pageable pageable) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findProductsByOsastoIDs'");
-    }
+    // public Page<Tuote> findProductsByOsastoIDs(List<Long>
+    // kulutustuotteetOsastoIds, Pageable pageable) {
+    // return tuoteRepository.findByOsastoIdIn(kulutustuotteetOsastoIds, pageable);
+    // }
 }
