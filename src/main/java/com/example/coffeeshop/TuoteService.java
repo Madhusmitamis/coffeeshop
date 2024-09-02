@@ -101,6 +101,7 @@ public class TuoteService {
     }
 
     public Page<Tuote> searchTuotteetByNimi(String keyword, int page, int size, Sort sort) {
+
         Pageable pageable = PageRequest.of(page, size, sort);
         return tuoteRepository.searchTuotteetByNimi(keyword, pageable);
     }
@@ -116,6 +117,6 @@ public class TuoteService {
 
     // public Page<Tuote> findProductsByOsastoIDs(List<Long>
     // kulutustuotteetOsastoIds, Pageable pageable) {
-    // return tuoteRepository.findByOsastoIdIn(kulutustuotteetOsastoIds, pageable);
+    // return tuoteRepository.findByOsastoId(kulutustuotteetOsastoIds, pageable);
     // }
 }

@@ -68,44 +68,6 @@ public class TuoteController {
         return "redirect:/admin";
     }
 
-    // @GetMapping("/kahvilaitteet")
-    // public String showProductsPage(@RequestParam(defaultValue = "1") int page,
-    // Model model) {
-    // int pageSize = 9; // 3 products per row * 3 rows per page
-    // Page<Tuote> productPage = tuoteService.getProductsPage(page, pageSize);
-    // model.addAttribute("productPage", productPage);
-    // return "kahvilaitteet";
-    // }
-    // @GetMapping("/searchKahvilaitteet")
-    // public String searchKahvilaitteet(@RequestParam("keyword") String keyword,
-    // @RequestParam(value = "page", defaultValue = "0") int page,
-    // @RequestParam(value = "size", defaultValue = "10") int size,
-    // Model model) {
-
-    // Page<Tuote> tuotteetPage = tuoteService.searchTuotteetByNimi(keyword, page,
-    // size, sort);
-    // model.addAttribute("tuotteet", tuotteetPage.getContent());
-    // model.addAttribute("keyword", keyword);
-    // model.addAttribute("currentPage", page);
-    // model.addAttribute("totalPages", tuotteetPage.getTotalPages());
-    // return "kahvilaitteet"; // Return the name of your HTML file
-    // }
-
-    // @GetMapping("/searchKulutustuotteet")
-    // public String searchKulutustuotteet(@RequestParam("keyword") String keyword,
-    // @RequestParam(value = "page", defaultValue = "0") int page,
-    // @RequestParam(value = "size", defaultValue = "10") int size,
-    // Model model) {
-
-    // Page<Tuote> tuotteetPage = tuoteService.searchTuotteetByNimi(keyword, page,
-    // size, sort);
-    // model.addAttribute("tuotteet", tuotteetPage.getContent());
-    // model.addAttribute("keyword", keyword);
-    // model.addAttribute("currentPage", page);
-    // model.addAttribute("totalPages", tuotteetPage.getTotalPages());
-    // model.addAttribute("sortDir", sortDir);
-    // return "kulutustuotteet"; // Return the name of your HTML file
-    // }
     @GetMapping("/searchKahvilaitteet")
     public String searchKahvilaitteet(@RequestParam("keyword") String keyword,
             @RequestParam(value = "page", defaultValue = "0") int page,

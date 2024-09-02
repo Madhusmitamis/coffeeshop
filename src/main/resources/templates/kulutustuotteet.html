@@ -47,7 +47,7 @@
 
     <div th:if="${currentPage > 0}">
       <a
-        th:href="@{/kulutustuotteet(page=${currentPage - 1},sortDir=${sortDir})}"
+        th:href="@{/searchKulutustuotteet(page=${currentPage - 1},sortDir=${sortDir})}"
       >
         <button class="edellinen">Edellinen</button>
       </a>
@@ -55,7 +55,7 @@
 
     <div th:if="${currentPage != null and currentPage &lt; totalPages - 1}">
       <a
-        th:href="@{/kulutustuotteet(page=${currentPage + 1},sortDir=${sortDir})}"
+        th:href="@{/searchKulutustuotteet(page=${currentPage + 1},sortDir=${sortDir})}"
       >
         <button class="seurava">Seuraava</button>
       </a>
