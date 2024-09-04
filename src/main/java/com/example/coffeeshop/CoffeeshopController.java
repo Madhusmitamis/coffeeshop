@@ -25,6 +25,9 @@ public class CoffeeshopController {
     @Autowired
     private TuoteService tuoteService;
 
+    @Autowired
+    private OsastoService osastoService;
+
     @GetMapping("/")
     public String home() {
         return "index";
@@ -77,6 +80,8 @@ public class CoffeeshopController {
     public String kulutustuotteet(Model model, @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "asc") String sortDir) {
         int pageSize = 6;
+        // Sort sort = Sort.by(Sort.Direction.DESC, "hinta");
+
         Sort sort = Sort.by(Sort.Direction.fromString(sortDir), "hinta");
         Pageable pageable = PageRequest.of(page, pageSize, sort);
         Page<Tuote> tuotePage = tuoteService.getProductForKulutustuotteet(pageable);

@@ -47,7 +47,7 @@
 
     <div th:if="${currentPage > 0}">
       <a
-        th:href="@{/searchKulutustuotteet(page=${currentPage - 1},sortDir=${sortDir})}"
+        th:href="@{/kulutustuotteet(page=${currentPage - 1},sortDir=${sortDir})}"
       >
         <button class="edellinen">Edellinen</button>
       </a>
@@ -55,26 +55,12 @@
 
     <div th:if="${currentPage != null and currentPage &lt; totalPages - 1}">
       <a
-        th:href="@{/searchKulutustuotteet(page=${currentPage + 1},sortDir=${sortDir})}"
+        th:href="@{/kulutustuotteet(page=${currentPage + 1},sortDir=${sortDir})}"
       >
         <button class="seurava">Seuraava</button>
       </a>
     </div>
-    <!-- <div th:if="${currentPage > 0}">
-      <a
-        th:href="@{/searchKulutustuotteet(keyword=${keyword}, page=${currentPage - 1}, size=${size})}"
-      >
-        <button class="edellinen">Edellinen</button>
-      </a>
-    </div>
 
-    <div th:if="${currentPage != null and currentPage < totalPages - 1}">
-      <a
-        th:href="@{/searchKulutustuotteet(keyword=${keyword}, page=${currentPage + 1}, size=${size})}"
-      >
-        <button class="seuraava">Seuraava</button>
-      </a>
-    </div> -->
     <form th:action="@{/logout}" method="post">
       <input type="submit" value="Sign Out" />
     </form>

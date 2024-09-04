@@ -2,6 +2,8 @@ package com.example.coffeeshop;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -78,7 +80,9 @@ public class TuoteController {
         // another property for sorting
         Sort.Direction direction = Sort.Direction.fromString(sortDir);
         Sort sort = Sort.by(direction, "hinta");
-        Page<Tuote> tuotteetPage = tuoteService.searchTuotteetByNimi(keyword, page, size, sort);
+        List<Long> kahvilaitteetOsastoIds = Arrays.asList(1L);
+        Page<Tuote> tuotteetPage = tuoteService.searchTuotteetByNimiAndOsasto(keyword, kahvilaitteetOsastoIds, page,
+                size, sort);
         model.addAttribute("tuotteet", tuotteetPage.getContent());
         model.addAttribute("keyword", keyword);
         model.addAttribute("currentPage", page);
@@ -97,7 +101,9 @@ public class TuoteController {
         // another property for sorting
         Sort.Direction direction = Sort.Direction.fromString(sortDir);
         Sort sort = Sort.by(direction, "hinta");
-        Page<Tuote> tuotteetPage = tuoteService.searchTuotteetByNimi(keyword, page, size, sort);
+        List<Long> kulutustuotteetOsastoIds = Arrays.asList(2L, 7L);
+        Page<Tuote> tuotteetPage = tuoteService.searchTuotteetByNimiAndOsasto(keyword, kulutustuotteetOsastoIds, page,
+                size, sort);
         model.addAttribute("tuotteet", tuotteetPage.getContent());
         model.addAttribute("keyword", keyword);
         model.addAttribute("currentPage", page);

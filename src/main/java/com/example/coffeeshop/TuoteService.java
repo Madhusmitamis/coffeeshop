@@ -100,10 +100,16 @@ public class TuoteService {
         tuoteRepository.save(tuote);
     }
 
-    public Page<Tuote> searchTuotteetByNimi(String keyword, int page, int size, Sort sort) {
+    // public Page<Tuote> searchTuotteetByNimi(String keyword, int page, int size,
+    // Sort sort) {
 
+    // Pageable pageable = PageRequest.of(page, size, sort);
+    // return tuoteRepository.searchTuotteetByNimi(keyword, pageable);
+    // }
+    public Page<Tuote> searchTuotteetByNimiAndOsasto(String keyword, List<Long> osastoIds, int page, int size,
+            Sort sort) {
         Pageable pageable = PageRequest.of(page, size, sort);
-        return tuoteRepository.searchTuotteetByNimi(keyword, pageable);
+        return tuoteRepository.searchTuotteetByNimiAndOsasto(keyword, osastoIds, pageable);
     }
 
     // total number of products
