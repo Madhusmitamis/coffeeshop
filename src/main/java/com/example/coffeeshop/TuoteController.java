@@ -74,33 +74,31 @@ public class TuoteController {
     @GetMapping("/searchKahvilaitteet")
     public String searchKahvilaitteet(@RequestParam("keyword") String keyword,
             @RequestParam(value = "page", defaultValue = "0") int page,
-            @RequestParam(value = "size", defaultValue = "20") int size,
+            @RequestParam(value = "size", defaultValue = "10") int size,
             @RequestParam(value = "sortDir", defaultValue = "asc") String sortDir,
             Model model) {
 
         Sort.Direction direction = Sort.Direction.fromString(sortDir);
         Sort sort = Sort.by(direction, "hinta");
         Pageable pageable = PageRequest.of(page, size, sort);
+
         List<Long> kahvilaitteetOsastoIds = Arrays.asList(1L);
         Page<Tuote> tuotteetPage = tuoteService.searchTuotteetByNimiAndOsasto(keyword, kahvilaitteetOsastoIds,
                 pageable);
-
-        long totalKahvilaitteet = tuoteService.countTotalProducts(kahvilaitteetOsastoIds);
 
         model.addAttribute("tuotteet", tuotteetPage.getContent());
         model.addAttribute("keyword", keyword);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", tuotteetPage.getTotalPages());
-        model.addAttribute("totalKahvilaitteet", totalKahvilaitteet);
         model.addAttribute("sortDir", sortDir);
         return "kahvilaitteet";
     }
 
     @GetMapping("/searchKulutustuotteet")
     public String searchKulutustuotteet(@RequestParam("keyword") String keyword,
-            @RequestParam(value = "page", defaultValue = "0") int page,
-            @RequestParam(value = "size", defaultValue = "10") int size,
-            @RequestParam(value = "sortDir", defaultValue = "asc") String sortDir,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "asc") String sortDir,
             Model model) {
 
         Sort.Direction direction = Sort.Direction.fromString(sortDir);

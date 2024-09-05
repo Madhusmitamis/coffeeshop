@@ -3,10 +3,10 @@ package com.example.coffeeshop;
 import java.util.Arrays;
 import java.util.List;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+
 import org.springframework.data.domain.Pageable;
 import java.math.BigDecimal;
-import org.springframework.data.domain.Sort;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
@@ -102,7 +102,6 @@ public class TuoteService {
     public Page<Tuote> searchTuotteetByNimiAndOsasto(String keyword, List<Long> osastoIds, Pageable pageable) {
 
         return tuoteRepository.findByNimiContainingAndOsastoIdIn(keyword, osastoIds, pageable);
-
     }
 
     // total number of products
