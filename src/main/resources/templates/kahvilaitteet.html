@@ -12,6 +12,10 @@
 
     <p th:text="'Tuotteita yhteensä: ' + ${totalKahvilaitteet}"></p>
 
+    <!-- <p
+      th:text="'Sivu ' + (${currentPage != null ? currentPage + 1 : 1}) + ' / ' + ${totalPages != null ? totalPages : 1}"
+    ></p> -->
+
     <form action="#" th:action="@{/searchKahvilaitteet}" method="GET">
       <input
         type="text"
@@ -66,6 +70,8 @@
     <form th:action="@{/logout}" method="post">
       <input type="submit" value="Sign Out" />
     </form>
+
+    <p th:text="'Sivu ' + (${currentPage} + 1) + ' / ' + ${totalPages}"></p>
 
     <footer>
       <p>@copyright madhu's cafe</p>

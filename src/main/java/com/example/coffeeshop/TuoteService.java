@@ -35,18 +35,17 @@ public class TuoteService {
     }
 
     public Page<Tuote> getProductForKahvilaitteet(Pageable pageable) {
-        // Ensure that pageable already contains the sort information
-        List<Long> kahvilaitteetOsastoIds = Arrays.asList(1L);
-        return tuoteRepository.findProductsByOsastoIDIn(kahvilaitteetOsastoIds, pageable);
 
-        // return tuoteRepository.findProductsByOsastoID(1L, pageable);
+        List<Long> kahvilaitteetOsastoIds = Arrays.asList(1L);
+        return tuoteRepository.findProductsByOsastoIDIn(kahvilaitteetOsastoIds,
+                pageable);
     }
 
     public Page<Tuote> getProductForKulutustuotteet(Pageable pageable) {
         List<Long> kulutustuotteetOsastoIds = Arrays.asList(2L, 7L);
-        // return tuoteRepository.findProductsByOsastoIDIn(Arrays.asList(2L, 7L),
-        // pageable);
-        return tuoteRepository.findProductsByOsastoIDIn(kulutustuotteetOsastoIds, pageable);
+
+        return tuoteRepository.findProductsByOsastoIDIn(kulutustuotteetOsastoIds,
+                pageable);
     }
 
     public List<Valmistaja> findAllValmistajat() {
@@ -100,16 +99,10 @@ public class TuoteService {
         tuoteRepository.save(tuote);
     }
 
-    // public Page<Tuote> searchTuotteetByNimi(String keyword, int page, int size,
-    // Sort sort) {
+    public Page<Tuote> searchTuotteetByNimiAndOsasto(String keyword, List<Long> osastoIds, Pageable pageable) {
 
-    // Pageable pageable = PageRequest.of(page, size, sort);
-    // return tuoteRepository.searchTuotteetByNimi(keyword, pageable);
-    // }
-    public Page<Tuote> searchTuotteetByNimiAndOsasto(String keyword, List<Long> osastoIds, int page, int size,
-            Sort sort) {
-        Pageable pageable = PageRequest.of(page, size, sort);
-        return tuoteRepository.searchTuotteetByNimiAndOsasto(keyword, osastoIds, pageable);
+        return tuoteRepository.findByNimiContainingAndOsastoIdIn(keyword, osastoIds, pageable);
+
     }
 
     // total number of products
@@ -121,8 +114,4 @@ public class TuoteService {
         tuoteRepository.deleteById(id);
     }
 
-    // public Page<Tuote> findProductsByOsastoIDs(List<Long>
-    // kulutustuotteetOsastoIds, Pageable pageable) {
-    // return tuoteRepository.findByOsastoId(kulutustuotteetOsastoIds, pageable);
-    // }
 }

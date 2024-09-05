@@ -25,9 +25,6 @@ public class CoffeeshopController {
     @Autowired
     private TuoteService tuoteService;
 
-    @Autowired
-    private OsastoService osastoService;
-
     @GetMapping("/")
     public String home() {
         return "index";

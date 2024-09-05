@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
@@ -73,20 +74,24 @@ public class TuoteController {
     @GetMapping("/searchKahvilaitteet")
     public String searchKahvilaitteet(@RequestParam("keyword") String keyword,
             @RequestParam(value = "page", defaultValue = "0") int page,
-            @RequestParam(value = "size", defaultValue = "10") int size,
+            @RequestParam(value = "size", defaultValue = "20") int size,
             @RequestParam(value = "sortDir", defaultValue = "asc") String sortDir,
             Model model) {
-        // Sort sort = Sort.by(Sort.Direction.fromString(sortDir), "hinta"); // or use
-        // another property for sorting
+
         Sort.Direction direction = Sort.Direction.fromString(sortDir);
         Sort sort = Sort.by(direction, "hinta");
+        Pageable pageable = PageRequest.of(page, size, sort);
         List<Long> kahvilaitteetOsastoIds = Arrays.asList(1L);
-        Page<Tuote> tuotteetPage = tuoteService.searchTuotteetByNimiAndOsasto(keyword, kahvilaitteetOsastoIds, page,
-                size, sort);
+        Page<Tuote> tuotteetPage = tuoteService.searchTuotteetByNimiAndOsasto(keyword, kahvilaitteetOsastoIds,
+                pageable);
+
+        long totalKahvilaitteet = tuoteService.countTotalProducts(kahvilaitteetOsastoIds);
+
         model.addAttribute("tuotteet", tuotteetPage.getContent());
         model.addAttribute("keyword", keyword);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", tuotteetPage.getTotalPages());
+        model.addAttribute("totalKahvilaitteet", totalKahvilaitteet);
         model.addAttribute("sortDir", sortDir);
         return "kahvilaitteet";
     }
@@ -97,13 +102,14 @@ public class TuoteController {
             @RequestParam(value = "size", defaultValue = "10") int size,
             @RequestParam(value = "sortDir", defaultValue = "asc") String sortDir,
             Model model) {
-        // Sort sort = Sort.by(Sort.Direction.fromString(sortDir), "hinta"); // or use
-        // another property for sorting
+
         Sort.Direction direction = Sort.Direction.fromString(sortDir);
         Sort sort = Sort.by(direction, "hinta");
+        Pageable pageable = PageRequest.of(page, size, sort);
+
         List<Long> kulutustuotteetOsastoIds = Arrays.asList(2L, 7L);
-        Page<Tuote> tuotteetPage = tuoteService.searchTuotteetByNimiAndOsasto(keyword, kulutustuotteetOsastoIds, page,
-                size, sort);
+        Page<Tuote> tuotteetPage = tuoteService.searchTuotteetByNimiAndOsasto(keyword, kulutustuotteetOsastoIds,
+                pageable);
         model.addAttribute("tuotteet", tuotteetPage.getContent());
         model.addAttribute("keyword", keyword);
         model.addAttribute("currentPage", page);

@@ -17,9 +17,11 @@ public interface TuoteRepository extends JpaRepository<Tuote, Long> {
         Page<Tuote> findProductsByOsastoID(@Param("osastoID") Long osastoID, Pageable pageable);
 
         @Query("SELECT t FROM Tuote t JOIN FETCH t.osasto o WHERE o.id IN :osastoIDs OR o.osastoIdp IN :osastoIDs")
-        Page<Tuote> findProductsByOsastoIDIn(@Param("osastoIDs") List<Long> osastoIDs, Pageable pageable);
 
-        Page<Tuote> findByOsastoId(long osastoId, Pageable pageable);
+        Page<Tuote> findProductsByOsastoIDIn(@Param("osastoIDs") List<Long> osastoIDs,
+                        Pageable pageable);
+
+        // Page<Tuote> findByOsastoId(long osastoId, Pageable pageable);
 
         // @Query("SELECT t FROM Tuote t WHERE LOWER(t.nimi)LIKE LOWER(CONCAT('%',
         // :keyword, '%'))")
@@ -34,32 +36,9 @@ public interface TuoteRepository extends JpaRepository<Tuote, Long> {
 
         @Query("SELECT COUNT(t) FROM Tuote t JOIN t.osasto o WHERE o.id IN :osastoIDs OR o.osastoIdp IN :osastoIDs")
         Long countProductsByOsastoIDIn(@Param("osastoIDs") List<Long> osastoIDs);
-        // Find products by a single osasto ID with proper pagination
-        // @Query("SELECT DISTINCT t FROM Tuote t JOIN t.osasto o WHERE o.id = :osastoID
-        // OR o.osastoIdp = :osastoID")
-        // Page<Tuote> findProductsByOsastoID(@Param("osastoID") Long osastoID, Pageable
-        // pageable);
 
-        // // Find products by multiple osasto IDs with proper pagination
-        // @Query("SELECT DISTINCT t FROM Tuote t JOIN t.osasto o WHERE o.id IN
-        // :osastoIDs OR o.osastoIdp IN :osastoIDs")
-        // Page<Tuote> findProductsByOsastoIDIn(@Param("osastoIDs") List<Long>
-        // osastoIDs, Pageable pageable);
-
-        // // Search products by name (keyword search) with pagination
-        // @Query("SELECT t FROM Tuote t WHERE LOWER(t.nimi) LIKE LOWER(CONCAT('%',
-        // :keyword, '%'))")
-        // Page<Tuote> searchTuotteetByNimi(@Param("keyword") String keyword, Pageable
-        // pageable);
-
-        // // Count products by a single osasto ID
-        // @Query("SELECT COUNT(t) FROM Tuote t JOIN t.osasto o WHERE o.id = :osastoID
-        // OR o.osastoIdp = :osastoID")
-        // Long countProductsByOsastoID(@Param("osastoID") Long osastoID);
-
-        // // Count products by multiple osasto IDs
-        // @Query("SELECT COUNT(t) FROM Tuote t JOIN t.osasto o WHERE o.id IN :osastoIDs
-        // OR o.osastoIdp IN :osastoIDs")
-        // Long countProductsByOsastoIDIn(@Param("osastoIDs") List<Long> osastoIDs);
+        @Query("SELECT t FROM Tuote t WHERE LOWER(t.nimi) LIKE LOWER(CONCAT('%', :keyword, '%')) AND t.osasto.id IN :osastoIds")
+        Page<Tuote> findByNimiContainingAndOsastoIdIn(@Param("keyword") String keyword,
+                        @Param("osastoIds") List<Long> osastoIds, Pageable pageable);
 
 }
