@@ -78,7 +78,7 @@ public class TuoteController {
             @RequestParam(value = "sortDir", defaultValue = "asc") String sortDir,
             Model model) {
 
-        Sort.Direction direction = Sort.Direction.fromString(sortDir);
+        Sort.Direction direction = Sort.Direction.fromString(sortDir.equalsIgnoreCase("desc") ? "DESC" : "ASC");
         Sort sort = Sort.by(direction, "hinta");
         Pageable pageable = PageRequest.of(page, size, sort);
 
@@ -91,6 +91,9 @@ public class TuoteController {
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", tuotteetPage.getTotalPages());
         model.addAttribute("sortDir", sortDir);
+
+        long totalKahvilaitteet = tuoteService.countTotalProducts(kahvilaitteetOsastoIds);
+        model.addAttribute("totalKahvilaitteet", totalKahvilaitteet);
         return "kahvilaitteet";
     }
 
@@ -113,6 +116,8 @@ public class TuoteController {
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", tuotteetPage.getTotalPages());
         model.addAttribute("sortDir", sortDir);
+        long totalKulutustuotteet = tuoteService.countTotalProducts(kulutustuotteetOsastoIds);
+        model.addAttribute("totalKulutustuotteet", totalKulutustuotteet);
         return "kulutustuotteet";
     }
 
